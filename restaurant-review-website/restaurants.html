@@ -87,77 +87,71 @@
       </div>
     </div>
 
-    <div class="posts">
+    <div id="add-post-form" class="not-visible">
+      <div class="form-header">
+        <label id="restaurant-name-input-label">Restaurant Name</label>
+        <input id="restaurant-name-input">
 
-      <div id="add-post-form" class="not-visible">
-        <div class="form-header">
-          <label id="restaurant-name-input-label">Restaurant Name</label>
-          <input id="restaurant-name-input">
-
-          <div class="rating-container">
-            <label id="rating-input-label">Rating</label>
-            <input id="rating-input">
-          </div>
-
-          <button id="form-exit-button">X</button>
+        <div class="rating-container">
+          <label id="rating-input-label">Rating</label>
+          <input id="rating-input">
         </div>
 
-        <label id="username-input-label">Username</label>
-        <input id="username-input">
-
-        <label id="description-input-label">Description</label>
-        <textarea id="description-input"></textarea>
-
-        <div id="form-error-message"></div>
-
-        <div class="form-buttons">
-          <button id="form-submit-button">Submit</button>
-          <button id="form-clear-button">Clear</button>
-        </div>
+        <button id="form-exit-button">X</button>
       </div>
 
-      <div id="left-column-posts">
+      <label id="username-input-label">Username</label>
+      <input id="username-input">
 
-        <div class="post">
-          <div class="rating rating5">86</div>
-          <div class="post-header">
-            <div class="restaurant-name">Restaurant Name</div>
-            <div class="time">2 months ago</div>
-            <div class="bs">
-              <img class="bookmark-icon" src="images/bookmark.png">
-              <div class="bs-tooltip">Bookmark</div>
-            </div>
+      <label id="description-input-label">Description</label>
+      <textarea id="description-input"></textarea>
+
+      <div id="form-error-message"></div>
+
+      <div class="form-buttons">
+        <button id="form-submit-button">Submit</button>
+        <button id="form-clear-button">Clear</button>
+      </div>
+    </div>
+
+    <div id="posts">
+
+      <div class="post">
+        <div class="rating rating5">86</div>
+        <div class="post-header">
+          <div class="restaurant-name">Restaurant Name</div>
+          <div class="time">2 months ago</div>
+          <div class="bs">
+            <img class="bookmark-icon" src="images/bookmark.png">
+            <div class="bs-tooltip">Bookmark</div>
           </div>
-          <div class="username">@username</div>
-          <div class="description">Food is not halal.</div>
-          <div class="image-grid">
-            <!-- <img class="image" src="images/food/not-halal-1.jpg">
+        </div>
+        <div class="username">@username</div>
+        <div class="description">Food is not halal.</div>
+        <div class="image-grid">
+          <!-- <img class="image" src="images/food/not-halal-1.jpg">
             <img class="image" src="images/food/not-halal-2.jpg">
             <img class="image" src="images/food/not-halal-3.jpg"> -->
+        </div>
+        <div class="stats">
+          <div class="reply-container">
+            <img class="reply-icon" src="images/replies.png">
+            <div>0</div>
+            <div class="tooltip">Reply</div>
           </div>
-          <div class="stats">
-            <div class="reply-container">
-              <img class="reply-icon" src="images/replies.png">
-              <div>0</div>
-              <div class="tooltip">Reply</div>
-            </div>
-            <div class="like-container">
-              <img class="like-icon" src="images/unactive-like.png">
-              <div>0</div>
-              <div class="tooltip">Like</div>
-            </div>
-            <div class="share-container">
-              <img class="share-icon" src="images/share.png">
-              <div>0</div>
-              <div class="tooltip">Share</div>
-            </div>
+          <div class="like-container">
+            <img class="like-icon" src="images/unactive-like.png">
+            <div>0</div>
+            <div class="tooltip">Like</div>
+          </div>
+          <div class="share-container">
+            <img class="share-icon" src="images/share.png">
+            <div>0</div>
+            <div class="tooltip">Share</div>
           </div>
         </div>
-
       </div>
-      <div id="right-column-posts">
 
-      </div>
     </div>
   </body>
 

@@ -89,7 +89,7 @@
   justify-content: space-between;
   column-gap: 24px;
   flex-shrink: 0; /* icons will not shrink with window */
-  margin-right: 22px;
+  margin: 0 22px;
 }
 
 .profile-icon-container,

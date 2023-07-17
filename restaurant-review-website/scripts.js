@@ -74,7 +74,7 @@ const addPost = () => {
     return;
   }
 
-  posts.push({
+  posts.unshift({
     name: restaurantName,
     rating: restaurantRating,
     ratingColor: ratingColor,
@@ -96,8 +96,7 @@ const addPost = () => {
   renderPosts();
 };
 function renderPosts() {
-  let leftPostsHTML = '';
-  let rightPostsHTML = '';
+  let postsHTML = '';
   for (let i = 0; i < posts.length; i++) {
     const { name, rating, ratingColor, username, description, replyCount, likeCount, shareCount} = posts[i];
     const html =
@@ -134,16 +133,11 @@ function renderPosts() {
         </div>
       </div>`
 
-    if (i % 2 == 0) {
-      leftPostsHTML += html;
-    } else {
-      rightPostsHTML += html;
-    }
+    postsHTML += html;
   }
   // console.log(leftPostsHTML);
   // console.log(rightPostsHTML);
-  document.getElementById('left-column-posts').innerHTML = leftPostsHTML;
-  document.getElementById('right-column-posts').innerHTML = rightPostsHTML;
+  document.getElementById('posts').innerHTML = postsHTML;
 
   document.querySelectorAll('.like-icon').forEach((likeButton, index) => {
     likeButton.addEventListener('click', () => {
