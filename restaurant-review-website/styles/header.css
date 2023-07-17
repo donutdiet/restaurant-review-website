@@ -1,0 +1,156 @@
+.header {
+  background-color: rgb(25, 25, 25); /* so stuff doesn't bleed through header */
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 50px;
+  z-index: 3;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.hamburger-icon {
+  height: 24px;
+  margin-right: 20px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+
+.logo {
+  margin-top: 5px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.middle-section {
+  display: flex;
+  flex: 1; /* should take up all available space up to max */
+  align-items: center;
+  max-width: 500px;
+  max-width: 500px;
+}
+
+.search-bar {
+  background-color: rgb(25, 25, 25);
+  color: rgb(207, 207, 207);
+  flex: 1; /* should take up all available space up to max */
+  height: 28px;
+  padding-left: 10px;
+  font-size: 14px;
+  border-width: 1px;
+  border-style: solid;
+  border-top-left-radius: 13px;
+  border-bottom-left-radius: 13px;
+  border-color: rgb(192, 192, 192);
+  box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.05);
+  margin-top: 3px;
+  width: 0; /* search bar will shrink all the way down */
+  outline: none;
+}
+.search-bar::placeholder {
+  font-family: Roboto, Arial;
+  font-size: 14px;
+}
+
+.search-button {
+  background-color: rgb(25, 25, 25);
+  height: 31.6px;
+  width: 50px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(192, 192, 192);
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-left: -1px;
+  margin-top: 3px;
+  cursor: pointer;
+}
+.search-button:active {
+  opacity: 0.85;
+}
+.search-icon {
+  height: 20px;
+  margin-top: 3px;
+  margin-right: 2px;
+}
+
+.right-section {
+  /* background-color: lightblue; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 24px;
+  flex-shrink: 0; /* icons will not shrink with window */
+  margin-right: 22px;
+}
+
+.profile-icon-container,
+.messages-icon-container,
+.notifications-icon-container,
+.settings-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* for the tooltips */
+  cursor: pointer;
+}
+.profile-icon-container .tooltip,
+.messages-icon-container .tooltip,
+.notifications-icon-container .tooltip,
+.settings-icon-container .tooltip {
+  background-color: rgb(80, 80, 80);
+  font-size: 13px;
+  border: none;
+  border-radius: 3px;
+  color: rgb(235, 235, 235);
+  position: absolute;
+  bottom: -28px;
+  padding: 3px 5px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.profile-icon-container .tooltip,
+.notifications-icon-container .tooltip {
+  bottom: -30px;
+}
+
+.profile-icon-container:hover .tooltip,
+.messages-icon-container:hover .tooltip,
+.notifications-icon-container:hover .tooltip,
+.settings-icon-container:hover .tooltip {
+  opacity: 1;
+}
+
+.profile-icon {
+  margin-top: 2px;
+  height: 28px;
+}
+.messages-icon {
+  margin-top: 10px;
+  height: 30px;
+}
+.notifications-icon {
+  margin-top: 6px;
+  height: 26px;
+}
+.settings-icon {
+  margin-top: 6px;
+  height: 30px;
+}
+
+.logo,
+.profile-icon,
+.messages-icon,
+.notifications-icon,
+.settings-icon {
+  filter: brightness(90%);
+}

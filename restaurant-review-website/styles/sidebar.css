@@ -1,0 +1,30 @@
+.sidebar {
+  color: rgba(238, 143, 159, 0.9);
+  position: fixed;
+  left: 0;
+  top: 50px;
+  bottom: 0;
+  width: 65px;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 10px;
+  padding-top: 0px;
+}
+
+.sidebar-container {
+  padding: 14px 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.sidebar-container:hover {
+  background-image: linear-gradient(rgb(70 70 70/40%) 0 0);
+}
+
+.home-icon,
+.following-icon,
+.trending-icon,
+.bookmarks-icon,
+.receipts-icon {
+  height: 32px;
+  filter: brightness(90%);
+}
