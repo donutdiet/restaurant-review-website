@@ -1,0 +1,6 @@
+.infobar {
+  float: right;
+  height: 100%;
+  max-width: 39%;
+  border: 1px solid gray;
+}

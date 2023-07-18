@@ -12,7 +12,7 @@
 }
 
 .sidebar-container {
-  padding: 14px 0;
+  padding: 10px 0;
   border-radius: 10px;
   cursor: pointer;
 }
@@ -21,10 +21,18 @@
 }
 
 .home-icon,
+.profile-icon,
 .following-icon,
 .trending-icon,
 .bookmarks-icon,
-.receipts-icon {
+.receipts-icon,
+.settings-icon {
   height: 32px;
   filter: brightness(90%);
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    display: none;
+  }
 }

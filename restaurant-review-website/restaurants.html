@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles/form.css">
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/sidebar.css">
+    <link rel="stylesheet" href="styles/infobar.css">
     <link rel="stylesheet" href="styles/posts.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,21 +22,18 @@
     <!--SO THE POSITION ABSOLUTE REFRESH BUTTON ISN'T ABOVE THE HEADER -->
     <button class="filter-button">Filter</button>
     <button class="sort-button">Sort</button>
+    <button class="refresh-button">Refresh</button>
     <button id="delete-button">Delete</button>
 
-    <div class="misc-button-container">
+    <!-- <div class="misc-button-container">
       <button id="toggle-button">
         Dark Mode
       </button>
-      <button class="refresh-button">
-        Refresh
-      </button>
-    </div>
+    </div> -->
     <button id="add-entry-button">+ Add an entry</button>
 
     <div class="header">
       <div class="left-section">
-        <img class="hamburger-icon" src="images/hamburger-menu.svg">
         <img class="logo" src="images/logo.png">
       </div>
       <div class="middle-section">
@@ -45,21 +43,17 @@
         </button>
       </div>
       <div class="right-section">
-        <div class="profile-icon-container">
-          <img class="profile-icon" src="images/profile.png">
-          <div class="tooltip">Profile</div>
-        </div>
-        <div class="messages-icon-container">
+        <div class="header-container">
           <img class="messages-icon" src="images/messages.png">
           <div class="tooltip">Messages</div>
         </div>
-        <div class="notifications-icon-container">
+        <div class="header-container">
           <img class="notifications-icon" src="images/notifications.png">
           <div class="tooltip">Notifications</div>
         </div>
-        <div class="settings-icon-container">
-          <img class="settings-icon" src="images/settings.png">
-          <div class="tooltip">Settings</div>
+        <div class="header-container">
+          <img class="receipts-icon" src="images/receipts.png">
+          <div class="tooltip">Receipts</div>
         </div>
       </div>
     </div>
@@ -67,24 +61,32 @@
     <div class="sidebar">
       <div class="sidebar-container">
         <img class="home-icon" src="images/home.png">
-        <div>Home</div>
+        <div class="sidebar-label">Home</div>
+      </div>
+      <div class="sidebar-container">
+        <img class="profile-icon" src="images/profile.png">
+        <div class="tooltip">Profile</div>
       </div>
       <div class="sidebar-container">
         <img class="following-icon" src="images/following.png">
-        <div>Following</div>
+        <div class="sidebar-label">Following</div>
       </div>
       <div class="sidebar-container">
         <img class="trending-icon" src="images/trending.png">
-        <div>Trending</div>
+        <div class="sidebar-label">Trending</div>
       </div>
       <div class="sidebar-container">
         <img class="bookmarks-icon" src="images/bookmark.png">
-        <div>Bookmarks</div>
+        <div class="sidebar-label">Bookmarks</div>
       </div>
       <div class="sidebar-container">
-        <img class="receipts-icon" src="images/receipts.png">
-        <div>Receipts</div>
+        <img class="settings-icon" src="images/settings.png">
+        <div class="tooltip">Settings</div>
       </div>
+    </div>
+
+    <div class="infobar">
+      infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar 
     </div>
 
     <div id="add-post-form" class="not-visible">
@@ -153,6 +155,7 @@
       </div>
 
     </div>
+
   </body>
 
   <script src="scripts.js"></script>

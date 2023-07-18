@@ -17,9 +17,9 @@ posts.push({
 document.getElementById('delete-button').addEventListener('click', () => {
   deletePosts();
 });
-document.getElementById('toggle-button').addEventListener('click', () => {
-  switchMode();
-});
+// document.getElementById('toggle-button').addEventListener('click', () => {
+//   switchMode();
+// });
 document.getElementById('add-entry-button').addEventListener('click', () => {
   openForm();
 });

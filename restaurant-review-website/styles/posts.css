@@ -1,25 +1,14 @@
 #posts {
-  margin: 4px 8px 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 10px;
   color: rgb(238, 238, 238);
+  margin-left: 65px;
+  margin-right: 40%;
 }
 
-.post {
-  flex: 49%;
-  max-width: 49%; 
+.post { 
   position: relative;
   font-family: Roboto;
   border: 1px solid rgb(90, 90, 90);
   margin-bottom: 10px;
-}
-/* On screens that are 1000px wide or less,
-go from two columns to one column */
-@media screen and (max-width: 1000px) {
-  .post {
-    flex: 100%;
-  }
 }
 
 /* fixed size so single digit rating looks normal */
@@ -102,9 +91,8 @@ go from two columns to one column */
 
 .stats {
   display: flex;
-  width: 50%;
+  width: 30%;
   justify-content: space-between;
-  margin: 4px 0 4px 55px;
   font-size: 13px;
 }
 .reply-container,
@@ -114,7 +102,7 @@ go from two columns to one column */
   position: relative;
   align-items: center;
   color: rgba(238, 143, 159, 0.9);
-  column-gap: 4px;
+  column-gap: 8px;
 }
 
 .reply-icon,
@@ -161,4 +149,16 @@ go from two columns to one column */
 .like-container:hover .tooltip,
 .share-container:hover .tooltip {
   opacity: 1;
+}
+
+@media (max-width: 800px) {
+  #posts {
+    margin-left: 0;
+  }
+  .time {
+    display: none;
+  }
+  .stats {
+    width: 60%;
+  }
 }

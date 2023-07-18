@@ -13,7 +13,7 @@
 .left-section {
   display: flex;
   align-items: center;
-  margin-left: 15px;
+  margin-left: 5px;
 }
 
 .hamburger-icon {
@@ -92,20 +92,14 @@
   margin: 0 22px;
 }
 
-.profile-icon-container,
-.messages-icon-container,
-.notifications-icon-container,
-.settings-icon-container {
+.header-container {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative; /* for the tooltips */
   cursor: pointer;
 }
-.profile-icon-container .tooltip,
-.messages-icon-container .tooltip,
-.notifications-icon-container .tooltip,
-.settings-icon-container .tooltip {
+.header-container .tooltip {
   background-color: rgb(80, 80, 80);
   font-size: 13px;
   border: none;
@@ -118,22 +112,11 @@
   transition: opacity 0.4s;
   pointer-events: none;
 }
-.profile-icon-container .tooltip,
-.notifications-icon-container .tooltip {
-  bottom: -30px;
-}
 
-.profile-icon-container:hover .tooltip,
-.messages-icon-container:hover .tooltip,
-.notifications-icon-container:hover .tooltip,
-.settings-icon-container:hover .tooltip {
+.header-container:hover .tooltip {
   opacity: 1;
 }
 
-.profile-icon {
-  margin-top: 2px;
-  height: 28px;
-}
 .messages-icon {
   margin-top: 10px;
   height: 30px;
@@ -142,15 +125,9 @@
   margin-top: 6px;
   height: 26px;
 }
-.settings-icon {
-  margin-top: 6px;
-  height: 30px;
-}
 
 .logo,
-.profile-icon,
 .messages-icon,
-.notifications-icon,
-.settings-icon {
+.notifications-icon {
   filter: brightness(90%);
 }

@@ -1,7 +1,6 @@
 body {
   background-color: rgb(25, 25, 25);
   padding-top: 50px;
-  padding-left: 65px;
   color: rgb(207, 207, 207);
 }
 
@@ -20,7 +19,7 @@ body {
   transition: opacity 0.1s;
 }
 .filter-button {
-  margin-left: 14px;
+  margin-left: 70px;
 }
 .sort-button {
   margin-left: 4px;
@@ -29,8 +28,8 @@ body {
 .misc-button-container {
   display: inline-block;
   position: absolute;
-  right: 22px;
-  top: 47px;
+  right: 70px;
+  top: 52px;
 }
 #toggle-button,
 .refresh-button {
