@@ -1,18 +1,3 @@
-const posts = [];
-
-posts.push({
-  name: 'Restaurant Name',
-  rating: 86,
-  ratingColor: 'rating5',
-  username: 'username',
-  description: 'Food is not halal.',
-  replyCount: 0,
-  likeCount: 0,
-  shareCount: 0,
-  likeStatus: false,
-  bookmarkStatus: false
-});
-
 // Event listeners for home page elements
 document.getElementById('delete-button').addEventListener('click', () => {
   deletePosts();
@@ -41,6 +26,14 @@ document.querySelectorAll('.like-icon').forEach((likeButton, index) => {
     likeButtonClicked(index);
   });
 });
+
+// -----------------------------------------
+
+// Assigns the posts saved through local storage to posts or defaults to empty and renders the posts
+const posts = JSON.parse(localStorage.getItem('posts')) || [];
+renderPosts();
+
+// -----------------------------------------
 
 // Process of adding an entry
 const addPost = () => {
@@ -86,12 +79,15 @@ const addPost = () => {
     likeStatus: false,
     bookmarkStatus: false
   });
+
+  // Updates the local storage variable as more posts get added
+  localStorage.setItem('posts', JSON.stringify(posts));
+
   restaurantNameObject.value = '';
   restaurantRatingObject.value = '';
   usernameObject.value = '';
   descriptionObject.value = '';
 
-  console.log(posts);
   closeForm();
   renderPosts();
 };
@@ -165,7 +161,6 @@ function formError(error) {
 
 // Update post stats
 function likeButtonClicked(index) {
-  console.log(index);
   if(posts[index].likeStatus) {
     posts[index].likeCount--;
     posts[index].likeStatus = false;
@@ -193,9 +188,10 @@ function getRatingColor(rating) {
   }
 }
 
-// Temp
+// Temporary
 function deletePosts() {
   posts.splice(0, posts.length);
+  localStorage.removeItem('posts');
   renderPosts();
 }
 // Doesn't really work
