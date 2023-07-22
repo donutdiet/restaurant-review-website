@@ -27,13 +27,6 @@ body {
   margin-left: 4px;
 }
 
-.misc-button-container {
-  display: inline-block;
-  position: absolute;
-  right: 70px;
-  top: 52px;
-}
-#toggle-button,
 .refresh-button,
 #delete-button {
   background-color: rgb(25, 25, 25);
@@ -76,16 +69,18 @@ body {
 .filter-button:hover,
 .sort-button:hover,
 #add-entry-button:hover,
-.refresh-button:hover,
-#toggle-button:hover {
+.refresh-button:hover {
   background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
 }
 .filter-button:active,
 .sort-button:active,
 #add-entry-button:active,
-.refresh-button:active,
-#toggle-button:active {
+.refresh-button:active {
   background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
+}
+
+.tooltip {
+  z-index: 1;
 }
 
 @media (max-width: 800px) {

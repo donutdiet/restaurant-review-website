@@ -4,12 +4,9 @@
   font-family: Roboto;
   position: fixed;
   padding: 35px 15px 12px 15px;
-  width: 45%;
-  height: fit-content;
-  min-width: 300px;
-  border: 3px solid rgb(238, 143, 159);
+  border: 3px solid rgba(238, 143, 159, 0.9);
   border-radius: 10px;
-  top: 55px;
+  top: 80px;
   left: 27%;
   right: 28%;
   z-index: 1;
@@ -18,17 +15,21 @@
   display: none;
 }
 
+#add-post-form ::placeholder {
+  color: rgb(204, 204, 204);
+  font-size: 16px;
+}
+
 input,
 textarea {
-  background-color: rgb(234, 234, 234);
   color: black;
   font-family: Roboto;
+  resize: none;
 }
 
 .form-header{
   display: flex;
   position: relative;
-  white-space: nowrap;
   margin-bottom: 20px;
 }
 
@@ -39,7 +40,7 @@ textarea {
   font-size: 12px;
 }
 #restaurant-name-input {
-  flex: 10;
+  flex: 12;
   margin-right: 8px;
   height: 25px;
   border: 3px solid rgba(238, 143, 159, 0.9);
@@ -47,6 +48,7 @@ textarea {
   font-size: 16px;
   font-weight: bold;
   outline: none;
+  min-width: 0; /* for resizing window */
 }
 
 .rating-container {
@@ -63,7 +65,6 @@ textarea {
 }
 #rating-input {
   flex: 1;
-  width: 60%;
   height: 25px;
   border: 3px solid rgba(238, 143, 159, 0.9);
   border-radius: 6px;
@@ -74,7 +75,7 @@ textarea {
 }
 
 #form-exit-button {
-  background-color: rgb(238, 143, 159);
+  background-color: rgba(238, 143, 159, 0.95);
   color: white;
   position: absolute;
   top: -35.25px;
@@ -111,9 +112,9 @@ textarea {
   font-size: 12px;
 }
 #description-input {
-  font-size: 14px;
+  font-size: 16px;
+  height: 23px;
   width: 97.5%;
-  height: 250px;
   border: 3px solid rgba(238, 143, 159, 0.9);
   border-radius: 6px;
   resize: none;

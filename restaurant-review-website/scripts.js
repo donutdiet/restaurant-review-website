@@ -2,9 +2,6 @@
 document.getElementById('delete-button').addEventListener('click', () => {
   deletePosts();
 });
-// document.getElementById('toggle-button').addEventListener('click', () => {
-//   switchMode();
-// });
 document.getElementById('add-entry-button').addEventListener('click', () => {
   openForm();
 });
@@ -20,23 +17,44 @@ document.getElementById('form-clear-button').addEventListener('click', () => {
   clearForm();
 });
 
-// Event listeners for post elements
-document.querySelectorAll('.like-icon').forEach((likeButton, index) => {
-  likeButton.addEventListener('click', () => {
-    likeButtonClicked(index);
+// Add event listeners for post elements
+function addPostEventListeners() {
+  document.querySelectorAll('.like-icon').forEach((likeButton, index) => {
+    likeButton.addEventListener('click', () => {
+      likeButtonClicked(index);
+    });
   });
-});
+  document.querySelectorAll('.reply-icon').forEach((replyButton, index) => {
+    replyButton.addEventListener('click', () => {
+      renderReplies(index);
+    });
+  });
+}
 
-// -----------------------------------------
+document.querySelectorAll('.')
+
+// For dynamic textareas
+const tx = document.getElementsByTagName("textarea");
+for (let i = 0; i < tx.length; i++) {
+  tx[i].addEventListener("input", OnInput, false);
+}
+function OnInput() {
+  this.style.height = 0;
+  this.style.height = (this.scrollHeight) + "px";
+}
+// scrollHeight does not work on display: none elements so need to add this after
+toggleDisplayById(document.getElementById('add-post-form'));
+
+// ----------------------------------------------
 
 // Assigns the posts saved through local storage to posts or defaults to empty and renders the posts
-const posts = JSON.parse(localStorage.getItem('posts')) || [];
-renderPosts();
+// const posts = JSON.parse(localStorage.getItem('posts')) || [];
+// renderPosts(0, posts.length);
 
-// -----------------------------------------
+// ----------------------------------------------
 
-// Process of adding an entry
-const addPost = () => {
+// Functions used during the process of adding an entry
+function addPost() {
   const restaurantNameObject = document.getElementById('restaurant-name-input');
   const restaurantName = restaurantNameObject.value;
 
@@ -77,8 +95,11 @@ const addPost = () => {
     likeCount: 0,
     shareCount: 0,
     likeStatus: false,
+    replyStatus: false,
+    replies: [],
     bookmarkStatus: false
   });
+  console.log(posts);
 
   // Updates the local storage variable as more posts get added
   localStorage.setItem('posts', JSON.stringify(posts));
@@ -89,13 +110,87 @@ const addPost = () => {
   descriptionObject.value = '';
 
   closeForm();
-  renderPosts();
-};
-function renderPosts() {
-  let postsHTML = '';
-  for (let i = 0; i < posts.length; i++) {
+  renderPosts(0, posts.length);
+  // addPostEventListeners();
+}
+function renderPosts(start, end) {
+  const postsHTML = getPostHTML(start, end);
+  document.getElementById('posts').innerHTML = postsHTML;
+  addPostEventListeners();
+}
+function formError(error) {
+  const errorMessageObject = document.getElementById('form-error-message');
+  if (error === 'emptyRestaurantName') {
+    errorMessageObject.innerHTML = '[a restaurant name is required]';
+  } else if (error === 'emptyRestaurantRating') {
+    errorMessageObject.innerHTML = '[a rating is required]';
+  } else if (error === 'invalidRestaurantRating') {
+    errorMessageObject.innerHTML = '[the rating must be a number from 1-99]';
+  } else if (error === 'emptyUsername') {
+    errorMessageObject.innerHTML = '[a username is required]';
+  }
+}
+function renderReplies(index) {
+  let repliesHTML = getPostHTML(0, index + 1);
+  repliesHTML += 
+    `<div class="post-reply-container">
+      <input class="reply-username-input" placeholder="Username">
+      <textarea class="comment-input" placeholder="Share your thoughts!"></textarea>
+      <div class="reply-buttons">
+        <button id="clear-reply-button">Clear</button>
+        <button id="send-reply-button">Send</button>
+      </div>
+    </div>`
+  repliesHTML += getPostHTML(index + 1, posts.length)
+  document.getElementById('posts').innerHTML = repliesHTML;
+  replyStatus = true;
+
+  addPostEventListeners();
+  
+}
+
+// Functions used for adding replies
+function addReply() {
+
+} 
+
+// Update post stats (incomplete)
+function likeButtonClicked(index) {
+  if(posts[index].likeStatus) {
+    posts[index].likeCount--;
+    posts[index].likeStatus = false;
+  } else {
+    posts[index].likeCount++;
+    posts[index].likeStatus = true;
+  }
+  renderPosts(0, posts.length);
+}
+function replyButtonClicked(index) {
+}
+
+// Restaurant rating color scale (bell curve)
+function getRatingColor(rating) {
+  if (rating < 3) {
+    return 'rating1';
+  } else if (rating < 16) {
+    return 'rating2';
+  } else if (rating < 50) {
+    return 'rating3';
+  } else if (rating < 84) {
+    return 'rating4';
+  } else if (rating < 97) {
+    return 'rating5';
+  } else if (rating < 100) {
+    return 'rating6';
+  }
+}
+
+// HTML for posts and replies
+function getPostHTML(start, end) {
+  let combinedHTML = '';
+  for (let i = start; i < end; i++) {
     const { name, rating, ratingColor, username, description, replyCount, likeCount, shareCount} = posts[i];
-    const html =
+    const postHTML =
       `<div class="post">
         <div class="rating ${ratingColor}">${rating}</div>
         <div class="post-header">
@@ -128,84 +223,34 @@ function renderPosts() {
           </div>
         </div>
       </div>`
-
-    postsHTML += html;
+    combinedHTML += postHTML;
   }
-  // console.log(leftPostsHTML);
-  // console.log(rightPostsHTML);
-  document.getElementById('posts').innerHTML = postsHTML;
-
-  document.querySelectorAll('.like-icon').forEach((likeButton, index) => {
-    likeButton.addEventListener('click', () => {
-      likeButtonClicked(index);
-    });
-  });
-  /* 
-  I don't think adding event listeners to all posts at the start of the code also add continue
-  adding listeners to new posts that are added to the page later, so I have to do this dumb bs where
-  I have to add new event listeners every time I render the posts.
-  */
+  return combinedHTML;
 }
-function formError(error) {
-  const errorMessageObject = document.getElementById('form-error-message');
-  if (error === 'emptyRestaurantName') {
-    errorMessageObject.innerHTML = '[a restaurant name is required]';
-  } else if (error === 'emptyRestaurantRating') {
-    errorMessageObject.innerHTML = '[a rating is required]';
-  } else if (error === 'invalidRestaurantRating') {
-    errorMessageObject.innerHTML = '[the rating must be a number from 1-99]';
-  } else if (error === 'emptyUsername') {
-    errorMessageObject.innerHTML = '[a username is required]';
-  }
-}
-
-// Update post stats
-function likeButtonClicked(index) {
-  if(posts[index].likeStatus) {
-    posts[index].likeCount--;
-    posts[index].likeStatus = false;
-  } else {
-    posts[index].likeCount++;
-    posts[index].likeStatus = true;
-  }
-  renderPosts();
-}
-
-// Restaurant rating color scale
-function getRatingColor(rating) {
-  if (rating < 3) {
-    return 'rating1';
-  } else if (rating < 16) {
-    return 'rating2';
-  } else if (rating < 50) {
-    return 'rating3';
-  } else if (rating < 84) {
-    return 'rating4';
-  } else if (rating < 97) {
-    return 'rating5';
-  } else if (rating < 100) {
-    return 'rating6';
-  }
+function getReplyHTML(index) {
+  html =
+  `<div class="post-reply-container">
+    <input class="reply-username-input" placeholder="Username">
+    <textarea class="comment-input" placeholder="Share your thoughts!"></textarea>
+    <div class="reply-buttons">
+      <button id="clear-reply-button">Clear</button>
+      <button id="send-reply-button">Send</button>
+    </div>
+  </div>`
+  return html;
 }
 
 // Temporary
 function deletePosts() {
   posts.splice(0, posts.length);
   localStorage.removeItem('posts');
-  renderPosts();
+  renderPosts(0, posts.length);
 }
-// Doesn't really work
-function switchMode() {
-  const modeStatus = document.getElementById('toggle-button');
-  const body = document.querySelector('body');
-  if (modeStatus.innerText === "Dark Mode") {
-    modeStatus.innerHTML = "Light Mode";
-    modeStatus.classList.add('light-mode');
-    body.classList.add('light-mode');
+function toggleDisplayById(elementId) {
+  if(elementId.classList.contains('not-visible')) {
+    elementId.classList.remove('not-visible');
   } else {
-    modeStatus.innerHTML = "Dark Mode";
-    modeStatus.classList.remove('light-mode');
-    body.classList.remove('light-mode');
+    elementId.classList.add('not-visible');
   }
 }
 
