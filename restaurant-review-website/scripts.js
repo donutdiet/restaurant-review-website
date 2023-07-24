@@ -26,17 +26,40 @@ function addPostEventListeners() {
   });
   document.querySelectorAll('.reply-icon').forEach((replyButton, index) => {
     replyButton.addEventListener('click', () => {
-      renderReplies(index);
+      replyButtonClicked(index);
+      addReplyEventListeners();
     });
   });
 }
 
-document.querySelectorAll('.')
+// Event listeners for dynamic reply form elements
+function addReplyEventListeners() {
+  document.querySelectorAll('.send-reply-button').forEach((sendReplyButton, queryIndex) => {
+    for(let i=0; i<posts.length; i++) {
+      if (posts[i].replyStatus) {
+        sendReplyButton.addEventListener('click', () => {
+          addReply(i, queryIndex);
+        });
+      }
+    }
+  });
+  document.querySelectorAll('.delete-replies-button').forEach((deleteRepliesButton, queryIndex) => {
+    for(let i=0; i<posts.length; i++) {
+      if (posts[i].replyStatus) {
+        deleteRepliesButton.addEventListener('click', () => {
+          deleteReplies(i, queryIndex);
+        });
+      }
+    }
+  });
+}
 
 // For dynamic textareas
-const tx = document.getElementsByTagName("textarea");
-for (let i = 0; i < tx.length; i++) {
-  tx[i].addEventListener("input", OnInput, false);
+function dynamicTextarea() {
+  const tx = document.getElementsByTagName("textarea");
+  for (let i = 0; i < tx.length; i++) {
+    tx[i].addEventListener("input", OnInput, false);
+  }
 }
 function OnInput() {
   this.style.height = 0;
@@ -48,8 +71,9 @@ toggleDisplayById(document.getElementById('add-post-form'));
 // ----------------------------------------------
 
 // Assigns the posts saved through local storage to posts or defaults to empty and renders the posts
-// const posts = JSON.parse(localStorage.getItem('posts')) || [];
-// renderPosts(0, posts.length);
+const posts = JSON.parse(localStorage.getItem('posts')) || [];
+renderPostsAndReplies(0, posts.length);
+console.log(posts);
 
 // ----------------------------------------------
 
@@ -110,8 +134,7 @@ function addPost() {
   descriptionObject.value = '';
 
   closeForm();
-  renderPosts(0, posts.length);
-  // addPostEventListeners();
+  renderPostsAndReplies(0, posts.length);
 }
 function renderPosts(start, end) {
   const postsHTML = getPostHTML(start, end);
@@ -132,27 +155,48 @@ function formError(error) {
 }
 function renderReplies(index) {
   let repliesHTML = getPostHTML(0, index + 1);
-  repliesHTML += 
-    `<div class="post-reply-container">
-      <input class="reply-username-input" placeholder="Username">
-      <textarea class="comment-input" placeholder="Share your thoughts!"></textarea>
-      <div class="reply-buttons">
-        <button id="clear-reply-button">Clear</button>
-        <button id="send-reply-button">Send</button>
-      </div>
-    </div>`
+  repliesHTML += getReplyHTML(index);
   repliesHTML += getPostHTML(index + 1, posts.length)
   document.getElementById('posts').innerHTML = repliesHTML;
   replyStatus = true;
 
   addPostEventListeners();
-  
 }
 
-// Functions used for adding replies
-function addReply() {
-
-} 
+function addReply(index, queryIndex) {
+  let replyUsername = '';
+  let replyComment = '';
+  document.querySelectorAll('.reply-username-input').forEach((replyUsernameObject, index) => {
+    if(index == queryIndex) {
+      replyUsername = replyUsernameObject.value;
+    }
+  });
+  document.querySelectorAll('.comment-input').forEach((replyCommentObject, index) => {
+    if(index == queryIndex) {
+      replyComment = replyCommentObject.value;
+    }
+  });
+  if(replyUsername.trim() != '' && replyComment.trim() != '') {
+    posts[index].replies.unshift({
+      username: replyUsername,
+      comment: replyComment
+    });
+    posts[index].replyCount++;
+    renderPostsAndReplies(0, posts.length);
+  }
+}
+function renderPostsAndReplies(start, end) {
+  let combinedHTML = '';
+  for(let i=start; i<end; i++) {
+    combinedHTML += getPostHTML(i, i + 1);
+    if(posts[i].replyStatus) {
+      combinedHTML += getReplyHTML(i);
+    }
+  }
+  document.getElementById('posts').innerHTML = combinedHTML;
+  addPostEventListeners();
+  addReplyEventListeners();
+}
 
 // Update post stats (incomplete)
 function likeButtonClicked(index) {
@@ -163,9 +207,16 @@ function likeButtonClicked(index) {
     posts[index].likeCount++;
     posts[index].likeStatus = true;
   }
-  renderPosts(0, posts.length);
+  renderPostsAndReplies(0, posts.length);
 }
 function replyButtonClicked(index) {
+  if(posts[index].replyStatus) {
+    posts[index].replyStatus = false;
+  } else {
+    posts[index].replyStatus = true;
+  }
+  renderPostsAndReplies(0, posts.length);
+  dynamicTextarea();
 }
 
 // Restaurant rating color scale (bell curve)
@@ -233,10 +284,19 @@ function getReplyHTML(index) {
     <input class="reply-username-input" placeholder="Username">
     <textarea class="comment-input" placeholder="Share your thoughts!"></textarea>
     <div class="reply-buttons">
-      <button id="clear-reply-button">Clear</button>
-      <button id="send-reply-button">Send</button>
+      <button class="delete-replies-button">Delete</button>
+      <button class="send-reply-button">Send</button>
     </div>
   </div>`
+  for(let i=0; i<posts[index].replies.length; i++) {
+    html += 
+      `<div class="replies">
+        <div class="reply">
+          <div class="reply-username">@${posts[index].replies[i].username}</div>
+          <div class="reply-comment">${posts[index].replies[i].comment}</div>
+        </div>
+      </div>`
+  }
   return html;
 }
 
@@ -246,6 +306,12 @@ function deletePosts() {
   localStorage.removeItem('posts');
   renderPosts(0, posts.length);
 }
+function deleteReplies(index) {
+  posts[index].replies.splice(0, posts.length);
+  posts[index].replyCount = 0;
+  renderPostsAndReplies(0, posts.length);
+}
+
 function toggleDisplayById(elementId) {
   if(elementId.classList.contains('not-visible')) {
     elementId.classList.remove('not-visible');

@@ -27,8 +27,7 @@ body {
   margin-left: 4px;
 }
 
-.refresh-button,
-#delete-button {
+.refresh-button {
   background-color: rgb(25, 25, 25);
   color: white;
   font-size: 12px;

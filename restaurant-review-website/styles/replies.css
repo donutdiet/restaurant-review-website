@@ -27,18 +27,16 @@
   display: flex;
   justify-content: right;
 }
-#clear-reply-button,
-#send-reply-button {
+
+.send-reply-button {
+  background-color: rgba(238, 143, 159, 0.9);
+  color: white;
   width: 60px;
   height: 25px;
   border: none;
   border-radius: 12px;
   font-weight: bold;
   cursor: pointer;
-}
-#send-reply-button {
-  background-color: rgba(238, 143, 159, 0.9);
-  color: white;
 }
 
 .replies {
@@ -48,5 +46,7 @@
 
 .reply {
   font-size: 16px;
+}
+.reply-username {
   font-weight: bold;
 }
