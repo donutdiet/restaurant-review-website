@@ -47,7 +47,7 @@ function addReplyEventListeners() {
     for(let i=0; i<posts.length; i++) {
       if (posts[i].replyStatus) {
         deleteRepliesButton.addEventListener('click', () => {
-          deleteReplies(i, queryIndex);
+          deleteReplies(i);
         });
       }
     }
@@ -72,6 +72,10 @@ toggleDisplayById(document.getElementById('add-post-form'));
 
 // Assigns the posts saved through local storage to posts or defaults to empty and renders the posts
 const posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+for(let i=0; i<posts.length; i++) {
+  posts[i].replyStatus = false;
+}
 renderPostsAndReplies(0, posts.length);
 console.log(posts);
 
@@ -120,8 +124,11 @@ function addPost() {
     shareCount: 0,
     likeStatus: false,
     replyStatus: false,
+    bookmarkStatus: false,
     replies: [],
-    bookmarkStatus: false
+    likeButtonImg: 'images/unactive-like.png',
+    bookmarkImg: 'images/unactive-bookmark.png',
+    likeCountTextColor: ''
   });
   console.log(posts);
 
@@ -196,6 +203,9 @@ function renderPostsAndReplies(start, end) {
   document.getElementById('posts').innerHTML = combinedHTML;
   addPostEventListeners();
   addReplyEventListeners();
+  dynamicTextarea();
+
+  localStorage.setItem('posts', JSON.stringify(posts));
 }
 
 // Update post stats (incomplete)
@@ -203,9 +213,13 @@ function likeButtonClicked(index) {
   if(posts[index].likeStatus) {
     posts[index].likeCount--;
     posts[index].likeStatus = false;
+    posts[index].likeButtonImg = 'images/unactive-like.png';
+    posts[index].likeCountTextColor = '';
   } else {
     posts[index].likeCount++;
     posts[index].likeStatus = true;
+    posts[index].likeButtonImg = 'images/active-like.png';
+    posts[index].likeCountTextColor = 'pink-text';
   }
   renderPostsAndReplies(0, posts.length);
 }
@@ -240,7 +254,7 @@ function getRatingColor(rating) {
 function getPostHTML(start, end) {
   let combinedHTML = '';
   for (let i = start; i < end; i++) {
-    const { name, rating, ratingColor, username, description, replyCount, likeCount, shareCount} = posts[i];
+    const { name, rating, ratingColor, username, description, replyCount, likeCount, shareCount, likeButtonImg, bookmarkImg, likeCountTextColor} = posts[i];
     const postHTML =
       `<div class="post">
         <div class="rating ${ratingColor}">${rating}</div>
@@ -248,7 +262,7 @@ function getPostHTML(start, end) {
           <div class="restaurant-name">${name}</div>
           <div class="time">2 months ago</div>
           <div class="bs">
-            <img class="bookmark-icon" src="images/bookmark.png">
+            <img class="bookmark-icon" src=${bookmarkImg}>
             <div class="bs-tooltip">Bookmark</div>
           </div>
         </div>
@@ -263,8 +277,8 @@ function getPostHTML(start, end) {
             <div class="tooltip">Reply</div>
           </div>
           <div class="like-container">
-            <img class="like-icon" src="images/unactive-like.png">
-            <div>${likeCount}</div>
+            <img class="like-icon" src=${likeButtonImg}>
+            <div class=${likeCountTextColor}>${likeCount}</div>
             <div class="tooltip">Like</div>
           </div>
           <div class="share-container">
@@ -302,13 +316,13 @@ function getReplyHTML(index) {
 
 // Temporary
 function deletePosts() {
-  posts.splice(0, posts.length);
-  localStorage.removeItem('posts');
+  posts.splice(0, 1);
+  localStorage.setItem('posts', JSON.stringify(posts));
   renderPosts(0, posts.length);
 }
 function deleteReplies(index) {
-  posts[index].replies.splice(0, posts.length);
-  posts[index].replyCount = 0;
+  posts[index].replies.splice(0, 1);
+  posts[index].replyCount--;
   renderPostsAndReplies(0, posts.length);
 }
 

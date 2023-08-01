@@ -17,14 +17,10 @@ body {
   color: white;
   border: none;
   margin-top: 4px;
-  margin-bottom: 6px;
   padding: 6px 14px;
   border-radius: 14px;
   cursor: pointer; 
   transition: opacity 0.1s;
-}
-.sort-button {
-  margin-left: 4px;
 }
 
 .refresh-button {
@@ -82,7 +78,7 @@ body {
   z-index: 1;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .button-row {
     margin-left: 0;
   }

@@ -19,6 +19,9 @@
 .sidebar-container:hover {
   background-image: linear-gradient(rgb(70 70 70/40%) 0 0);
 }
+.sidebar-container:active {
+  background-image: linear-gradient(rgb(70 70 70/80%) 0 0);
+}
 
 .home-icon,
 .profile-icon,
@@ -28,10 +31,9 @@
 .receipts-icon,
 .settings-icon {
   height: 32px;
-  filter: brightness(90%);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .sidebar {
     display: none;
   }

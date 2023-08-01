@@ -37,10 +37,10 @@
       <div class="middle-section">
         <input class="search-bar" type="text" placeholder="Search">
         <button class="search-button">
-          <img class="search-icon" src="images/search-icon.svg">
+          <img class="search-icon" src="images/search-icon.png">
         </button>
       </div>
-      <div class="right-section">
+      <!-- <div class="right-section">
         <div class="header-container">
           <img class="messages-icon" src="images/messages.png">
           <div class="tooltip">Messages</div>
@@ -53,7 +53,7 @@
           <img class="receipts-icon" src="images/receipts.png">
           <div class="tooltip">Receipts</div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="sidebar">
@@ -74,7 +74,7 @@
         <div class="sidebar-label">Trending</div>
       </div>
       <div class="sidebar-container">
-        <img class="bookmarks-icon" src="images/bookmark.png">
+        <img class="bookmarks-icon" src="images/active-bookmark.png">
         <div class="sidebar-label">Bookmarks</div>
       </div>
       <div class="sidebar-container">
@@ -84,7 +84,31 @@
     </div>
 
     <div class="infobar">
-      infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar infobar 
+      <div class="tabs">
+        <input type="radio" id="info" name="tabs" checked="checked">
+        <label for="info">Info</label>
+        <div class="tab">
+          <div>User specific info like the elo based ranking system, trending restaurants and leaderboards</div>
+        </div>
+
+        <input type="radio" id="messages" name="tabs">
+        <label for="messages">Messages</label>
+        <div class="tab">
+          <div>User conversations</div>
+        </div>
+  
+        <input type="radio" id="notifications" name="tabs">
+        <label for="notifications">Notifications</label>
+        <div class="tab">
+          <div>All user notifications</div>
+        </div>
+  
+        <input type="radio" id="receipts" name="tabs">
+        <label for="receipts">Receipts</label>
+        <div class="tab">
+          <div>Currently under construction</div>
+        </div>
+      </div>
     </div>
 
     <div id="add-post-form">

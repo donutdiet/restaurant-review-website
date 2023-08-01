@@ -1,13 +1,15 @@
 .header {
   background-color: rgb(25, 25, 25); /* so stuff doesn't bleed through header */
   display: flex;
-  justify-content: space-between;
   position: fixed;
+  justify-content: space-between;
+  column-gap: 20px;
   left: 0;
-  right: 0;
+  right: 40%;
   top: 0;
   height: 50px;
   z-index: 3;
+  /* background-color: lightpink; */
 }
 
 .left-section {
@@ -16,13 +18,12 @@
   margin-left: 5px;
 }
 
-.hamburger-icon {
+/* .hamburger-icon {
   height: 24px;
   margin-right: 20px;
   margin-left: 5px;
   cursor: pointer;
-}
-
+} */
 
 .logo {
   margin-top: 5px;
@@ -31,11 +32,10 @@
 }
 
 .middle-section {
+  /* background-color: lightblue; */
   display: flex;
   flex: 1; /* should take up all available space up to max */
-  align-items: center;
-  max-width: 500px;
-  max-width: 500px;
+  padding: 0 25px;
 }
 
 .search-bar {
@@ -45,13 +45,11 @@
   height: 28px;
   padding-left: 10px;
   font-size: 14px;
-  border-width: 1px;
-  border-style: solid;
+  border: 1px solid rgba(238, 143, 159, 0.9);
   border-top-left-radius: 13px;
   border-bottom-left-radius: 13px;
-  border-color: rgb(192, 192, 192);
   box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.05);
-  margin-top: 3px;
+  margin-top: 10px;
   width: 0; /* search bar will shrink all the way down */
   outline: none;
 }
@@ -66,11 +64,11 @@
   width: 50px;
   border-width: 1px;
   border-style: solid;
-  border-color: rgb(192, 192, 192);
+  border: 1px solid rgba(238, 143, 159, 0.9);
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   margin-left: -1px;
-  margin-top: 3px;
+  margin-top: 10px;
   cursor: pointer;
 }
 .search-button:active {
@@ -82,13 +80,12 @@
   margin-right: 2px;
 }
 
-.right-section {
-  /* background-color: lightblue; */
+/* .right-section {
   display: flex;
   align-items: center;
   justify-content: space-between;
   column-gap: 24px;
-  flex-shrink: 0; /* icons will not shrink with window */
+  flex-shrink: 0;
   margin: 0 22px;
 }
 
@@ -96,7 +93,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; /* for the tooltips */
+  position: relative; 
   cursor: pointer;
 }
 .header-container .tooltip {
@@ -130,4 +127,4 @@
 .messages-icon,
 .notifications-icon {
   filter: brightness(90%);
-}
+} */

@@ -50,3 +50,7 @@
 .reply-username {
   font-weight: bold;
 }
+.reply-username,
+.reply-comment {
+  overflow-wrap: break-word;
+}
