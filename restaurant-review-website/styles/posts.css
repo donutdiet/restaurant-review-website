@@ -47,7 +47,7 @@
 .username,
 .description,
 .image-grid,
-.stats {
+.post-stats {
   margin-left: 55px;
 }
 
@@ -59,7 +59,7 @@
   font-size: 20px;
   font-weight: bold;
 }
-.time {
+.post-time {
   position: absolute;
   top: 10px;
   right: 60px;
@@ -89,7 +89,7 @@
   object-fit: cover;
 }
 
-.stats {
+.post-stats {
   display: flex;
   width: 40%;
   justify-content: space-between;
@@ -131,7 +131,7 @@
   transition: opacity 0.4s;
   pointer-events: none;
 }
-.stats .tooltip {
+.post-stats .tooltip {
   background-color: rgb(80, 80, 80);
   font-size: 12px;
   border: none;
@@ -156,10 +156,10 @@
 }
 
 @media (max-width: 600px) {
-  .time {
+  .post-time {
     display: none;
   }
-  .stats {
+  .post-stats {
     width: 60%;
   }
 }

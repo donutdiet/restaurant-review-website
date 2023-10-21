@@ -1,0 +1,56 @@
+.button-row {
+  /* border: 1px solid gray; */
+  padding: 8px 8px 0 8px;
+}
+
+.filter-button, 
+.sort-button,
+.refresh-button,
+#add-entry-button {
+  color: white;
+  font-size: 12px;
+  border: none;
+  cursor: pointer; 
+  transition: opacity 0.1s;
+}
+.filter-button:hover,
+.sort-button:hover,
+#add-entry-button:hover,
+.refresh-button:hover {
+  background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
+}
+.filter-button:active,
+.sort-button:active,
+#add-entry-button:active,
+.refresh-button:active {
+  background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
+}
+
+.filter-button, 
+.sort-button {
+  background-color: rgb(130, 130, 130);
+  padding: 6px 14px;
+  border-radius: 14px;
+}
+
+.refresh-button {
+  background-color: rgba(238, 143, 159, 0.9);
+  padding: 8px 16px;
+  border-radius: 12px;
+  float: right;
+}
+
+#add-entry-button {
+  background-color: rgba(238, 143, 159, 0.9);
+  position: fixed;
+  right: 40px;
+  bottom: 44px;
+  font-size: 16px;
+  padding: 30px 20px;
+  border-radius: 34px;
+  z-index: 1;
+}
+
+.tooltip {
+  z-index: 1;
+}

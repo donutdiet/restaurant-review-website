@@ -1,26 +1,32 @@
-.sidebar {
-  color: rgba(238, 143, 159, 0.9);
+#sidebar {
   position: fixed;
-  left: 0;
   top: 50px;
   bottom: 0;
   width: 65px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding-top: 6px;
+  font-size: 10px; 
   text-align: center;
-  font-family: Roboto;
-  font-size: 10px;
-  padding-top: 0px;
 }
 
 .sidebar-container {
+  width: 80%;
   padding: 10px 0;
+  margin-bottom: 5px;
+  border: 1.5px solid rgba(238, 143, 159, 0.9);
   border-radius: 10px;
+  color: rgba(238, 143, 159, 0.9);
   cursor: pointer;
 }
 .sidebar-container:hover {
-  background-image: linear-gradient(rgb(70 70 70/40%) 0 0);
+  background-image: linear-gradient(rgba(238, 143, 159, 0.075) 0 0);
 }
 .sidebar-container:active {
-  background-image: linear-gradient(rgb(70 70 70/80%) 0 0);
+  background-image: linear-gradient(rgba(238, 143, 159, 0.15) 0 0);
 }
 
 .home-icon,
@@ -31,4 +37,8 @@
 .receipts-icon,
 .settings-icon {
   height: 32px;
+}
+
+.sidebar-label {
+  
 }

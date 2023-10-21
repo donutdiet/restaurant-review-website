@@ -1,20 +1,12 @@
-.infobar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: 39%;
-  border-left: 1px solid rgb(20, 20, 20);
-
-  background-color: rgb(23, 23, 23);
-  font-family: Roboto;
+#infobar {
 }
 
 .tabs {
+  position: sticky;
+  top: 0;
+  
   display: flex;
   flex-wrap: wrap;
-  /* max-width: 600px; */
-  /* margin: 0 auto; */
 }
 .tabs input[type="radio"] {
   display: none;
@@ -27,7 +19,6 @@
 }
 
 .tabs .tab {
-  background-color: rgb(20, 20, 20);
   font-size: 14px;
   width: 100%;
   padding: 10px;
@@ -40,10 +31,6 @@
 }
 .tabs input[type="radio"]:checked + label {
   color: rgba(238, 143, 159, 0.9);
-}
-
-.tabs input[type="radio"]:checked + label {
-  background-color: rgb(20, 20, 20);
 }
 
 /* @media (max-width: 500px) {

@@ -1,15 +1,17 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <hmtl>
 
   <head>
     <title>Munch Review</title>
-    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/misc-buttons.css">
     <link rel="stylesheet" href="styles/form.css">
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/sidebar.css">
     <link rel="stylesheet" href="styles/infobar.css">
-    <link rel="stylesheet" href="styles/posts.css">
-    <link rel="stylesheet" href="styles/replies.css">
+    <!-- <link rel="stylesheet" href="styles/posts.css">
+    <link rel="stylesheet" href="styles/replyinput.css">
+    <link rel="stylesheet" href="styles/replies.css"> -->
+    <link rel="stylesheet" href="styles/main.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,70 +22,42 @@
   </head>
 
   <body>
-    <div class="button-row">
-      <!--SO THE POSITION ABSOLUTE REFRESH BUTTON ISN'T ABOVE THE HEADER -->
-      <button class="filter-button">Filter</button>
-      <button class="sort-button">Sort</button>
-      <button class="refresh-button">Refresh</button>
-      <button id="delete-button">Delete</button>
-
-      <button id="add-entry-button">+ Add an entry</button>
-    </div>
-
-    <div class="header">
-      <div class="left-section">
+    <div id="home-layout-grid">
+      <header>
         <img class="logo" src="images/logo.png">
-      </div>
-      <div class="middle-section">
         <input class="search-bar" type="text" placeholder="Search">
         <button class="search-button">
           <img class="search-icon" src="images/search-icon.png">
         </button>
-      </div>
-      <!-- <div class="right-section">
-        <div class="header-container">
-          <img class="messages-icon" src="images/messages.png">
-          <div class="tooltip">Messages</div>
-        </div>
-        <div class="header-container">
-          <img class="notifications-icon" src="images/notifications.png">
-          <div class="tooltip">Notifications</div>
-        </div>
-        <div class="header-container">
-          <img class="receipts-icon" src="images/receipts.png">
-          <div class="tooltip">Receipts</div>
-        </div>
-      </div> -->
-    </div>
+      </header>
 
-    <div class="sidebar">
-      <div class="sidebar-container">
-        <img class="home-icon" src="images/home.png">
-        <div class="sidebar-label">Home</div>
-      </div>
-      <div class="sidebar-container">
-        <img class="profile-icon" src="images/profile.png">
-        <div class="tooltip">Profile</div>
-      </div>
-      <div class="sidebar-container">
-        <img class="following-icon" src="images/following.png">
-        <div class="sidebar-label">Following</div>
-      </div>
-      <div class="sidebar-container">
-        <img class="trending-icon" src="images/trending.png">
-        <div class="sidebar-label">Trending</div>
-      </div>
-      <div class="sidebar-container">
-        <img class="bookmarks-icon" src="images/active-bookmark.png">
-        <div class="sidebar-label">Bookmarks</div>
-      </div>
-      <div class="sidebar-container">
-        <img class="settings-icon" src="images/settings.png">
-        <div class="tooltip">Settings</div>
-      </div>
-    </div>
+      <nav id="sidebar">
+        <div class="sidebar-container">
+          <img class="home-icon" src="images/home.png">
+          <div class="sidebar-label">Home</div>
+        </div>
+        <div class="sidebar-container">
+          <img class="profile-icon" src="images/profile.png">
+          <div class="sidebar-label">Profile</div>
+        </div>
+        <div class="sidebar-container">
+          <img class="following-icon" src="images/following.png">
+          <div class="sidebar-label">Following</div>
+        </div>
+        <div class="sidebar-container">
+          <img class="trending-icon" src="images/trending.png">
+          <div class="sidebar-label">Trending</div>
+        </div>
+        <div class="sidebar-container">
+          <img class="bookmarks-icon" src="images/active-bookmark.png">
+          <div class="sidebar-label">Bookmarks</div>
+        </div>
+        <div class="sidebar-container">
+          <img class="settings-icon" src="images/settings.png">
+          <div class="sidebar-label">Settings</div>
+        </div>
+      </nav>
 
-    <div class="infobar">
       <div class="tabs">
         <input type="radio" id="info" name="tabs" checked="checked">
         <label for="info">Info</label>
@@ -109,39 +83,105 @@
           <div>Currently under construction</div>
         </div>
       </div>
-    </div>
 
-    <div id="add-post-form">
-      <div class="form-header">
-        <label id="restaurant-name-input-label">Restaurant Name</label>
-        <input id="restaurant-name-input" placeholder="eg: Bibibop">
+      <div class="body">
+        <div class="button-row">
+          <!-- SO THE POSITION ABSOLUTE REFRESH BUTTON ISN'T ABOVE THE HEADER -->
+          <button class="filter-button">Filter</button>
+          <button class="sort-button">Sort</button>
+          <button class="refresh-button">Refresh</button>
+          <button id="delete-button">Delete</button>
 
-        <div class="rating-container">
-          <label id="rating-input-label">Rating</label>
-          <input id="rating-input" placeholder="-">
+          <button id="add-entry-button">+ Add an entry</button>
         </div>
 
-        <button id="form-exit-button">X</button>
+        <div id="add-post-form">
+          <div class="form-header">
+            <label id="restaurant-name-input-label">Restaurant Name</label>
+            <input id="restaurant-name-input" placeholder="eg: Bibibop">
+    
+            <div class="rating-container">
+              <label id="rating-input-label">Rating</label>
+              <input id="rating-input" placeholder="-">
+            </div>
+    
+            <button id="form-exit-button">X</button>
+          </div>
+    
+          <label id="username-input-label">Username</label>
+          <input id="username-input" placeholder="eg: donutdiet">
+    
+          <label id="description-input-label">Description</label>
+          <textarea id="description-input" placeholder="Optional, but encouraged!"></textarea>
+    
+          <div id="form-error-message"></div>
+    
+          <div class="form-buttons">
+            <button id="form-submit-button">Submit</button>
+            <button id="form-clear-button">Clear</button>
+          </div>
+        </div>
       </div>
 
-      <label id="username-input-label">Username</label>
-      <input id="username-input" placeholder="eg: donutdiet">
-
-      <label id="description-input-label">Description</label>
-      <textarea id="description-input" placeholder="Optional, but encouraged!"></textarea>
-
-      <div id="form-error-message"></div>
-
-      <div class="form-buttons">
-        <button id="form-submit-button">Submit</button>
-        <button id="form-clear-button">Clear</button>
-      </div>
     </div>
 
-    <div id="posts">
+    <!-- <div id="posts">
+      <div class="post">
+        <div class="rating ${ratingColor}">93</div>
+        <div class="post-header">
+          <div class="restaurant-name">Halal Bros Grill</div>
+          <div class="post-time">2 months ago</div>
+          <div class="bs">
+            <img class="bookmark-icon" src="images/unactive-bookmark.png">
+            <div class="bs-tooltip">Bookmark</div>
+          </div>
+        </div>
+        <div class="username">@Furqan</div>
+        <div class="description">Food is very halal.</div>
+        <div class="image-grid">
+        </div>
+        <div class="post-stats">
+          <div class="reply-container">
+            <img class="reply-icon" src="images/replies.png">
+            <div>0</div>
+            <div class="tooltip">Reply</div>
+          </div>
+          <div class="like-container">
+            <img class="like-icon" src="images/unactive-like.png">
+            <div class=${likeCountTextColor}>0</div>
+            <div class="tooltip">Like</div>
+          </div>
+          <div class="share-container">
+            <img class="share-icon" src="images/share.png">
+            <div>0</div>
+            <div class="tooltip">Share</div>
+          </div>
+        </div>
+      </div>
       <div class="replies">
+        <div class="post-reply-container">
+          <input class="reply-username-input" placeholder="Username">
+          <textarea class="comment-input" placeholder="Share your thoughts!"></textarea>
+          <div class="reply-buttons">
+            <button class="delete-replies-button">Delete</button>
+            <button class="send-reply-button">Send</button>
+          </div>
+        </div>
+        <div class="reply">
+          <div class="reply-header">
+            <div class="reply-username">@Majd &#183;</div>
+            <div class="reply-time">25 minutes</div>
+          </div>
+          <div class="reply-comment">ok buddy</div>
+          <div class="reply-stats">
+            <div class="like-container">
+              <img class="like-icon" src="images/unactive-like.png">
+              <div class=${likeCountTextColor}>0</div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </div> -->
   </body>
 
   <script src="scripts.js"></script>

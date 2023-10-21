@@ -71,13 +71,13 @@ toggleDisplayById(document.getElementById('add-post-form'));
 // ----------------------------------------------
 
 // Assigns the posts saved through local storage to posts or defaults to empty and renders the posts
-const posts = JSON.parse(localStorage.getItem('posts')) || [];
+// const posts = JSON.parse(localStorage.getItem('posts')) || [];
 
-for(let i=0; i<posts.length; i++) {
-  posts[i].replyStatus = false;
-}
-renderPostsAndReplies(0, posts.length);
-console.log(posts);
+// for(let i=0; i<posts.length; i++) {
+//   posts[i].replyStatus = false;
+// }
+// renderPostsAndReplies(0, posts.length);
+// console.log(posts);
 
 // ----------------------------------------------
 
@@ -260,7 +260,7 @@ function getPostHTML(start, end) {
         <div class="rating ${ratingColor}">${rating}</div>
         <div class="post-header">
           <div class="restaurant-name">${name}</div>
-          <div class="time">2 months ago</div>
+          <div class="post-time">2 months ago</div>
           <div class="bs">
             <img class="bookmark-icon" src=${bookmarkImg}>
             <div class="bs-tooltip">Bookmark</div>
@@ -270,7 +270,7 @@ function getPostHTML(start, end) {
         <div class="description">${description}</div>
         <div class="image-grid">
         </div>
-        <div class="stats">
+        <div class="post-stats">
           <div class="reply-container">
             <img class="reply-icon" src="images/replies.png">
             <div>${replyCount}</div>
@@ -304,11 +304,9 @@ function getReplyHTML(index) {
   </div>`
   for(let i=0; i<posts[index].replies.length; i++) {
     html += 
-      `<div class="replies">
-        <div class="reply">
-          <div class="reply-username">@${posts[index].replies[i].username}</div>
-          <div class="reply-comment">${posts[index].replies[i].comment}</div>
-        </div>
+      `<div class="reply">
+        <div class="reply-username">@${posts[index].replies[i].username}</div>
+        <div class="reply-comment">${posts[index].replies[i].comment}</div>
       </div>`
   }
   return html;

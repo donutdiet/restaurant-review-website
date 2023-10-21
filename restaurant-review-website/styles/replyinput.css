@@ -1,0 +1,41 @@
+.post-reply-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(90, 90, 90);
+  padding: 6px 50px 4px 50px;
+}
+
+.reply-username-input,
+.comment-input {
+  background-color: rgb(25, 25, 25);
+  color: rgb(207, 207, 207);
+  border: none;
+  resize: none;
+  outline: none;
+}
+.reply-username-input {
+  font-size: 12px;
+  width: 30%;
+}
+.comment-input {
+  height: 28px;
+  width: 85%;
+  font-size: 20px;
+}
+
+.reply-buttons {
+  display: flex;
+  justify-content: right;
+}
+
+.send-reply-button {
+  background-color: rgba(238, 143, 159, 0.9);
+  color: white;
+  width: 60px;
+  height: 25px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
