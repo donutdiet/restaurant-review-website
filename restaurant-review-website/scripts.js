@@ -56,17 +56,20 @@ function addReplyEventListeners() {
 
 // For dynamic textareas
 function dynamicTextarea() {
-  const tx = document.getElementsByTagName("textarea");
-  for (let i = 0; i < tx.length; i++) {
-    tx[i].addEventListener("input", OnInput, false);
+  const textarea = document.getElementsByTagName("textarea");
+  for (let i = 0; i < textarea.length; i++) {
+    textarea[i].addEventListener("input", OnInput, false);
   }
 }
 function OnInput() {
-  this.style.height = 0;
-  this.style.height = (this.scrollHeight) + "px";
+  if(this.clientHeight < this.scrollHeight) {
+    this.style.height = 0;
+    this.style.height = (this.scrollHeight) + "px";
+  }
 }
 // scrollHeight does not work on display: none elements so need to add this after
-toggleDisplayById(document.getElementById('add-post-form'));
+// toggleDisplayById(document.getElementById('add-post-form'));
+dynamicTextarea();
 
 // ----------------------------------------------
 
@@ -83,6 +86,7 @@ toggleDisplayById(document.getElementById('add-post-form'));
 
 // Functions used during the process of adding an entry
 function addPost() {
+  
   const restaurantNameObject = document.getElementById('restaurant-name-input');
   const restaurantName = restaurantNameObject.value;
 
@@ -324,13 +328,13 @@ function deleteReplies(index) {
   renderPostsAndReplies(0, posts.length);
 }
 
-function toggleDisplayById(elementId) {
-  if(elementId.classList.contains('not-visible')) {
-    elementId.classList.remove('not-visible');
-  } else {
-    elementId.classList.add('not-visible');
-  }
-}
+// function toggleDisplayById(elementId) {
+//   if(elementId.classList.contains('not-visible')) {
+//     elementId.classList.remove('not-visible');
+//   } else {
+//     elementId.classList.add('not-visible');
+//   }
+// }
 
 // Change the state of the form
 function openForm() {

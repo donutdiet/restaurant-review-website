@@ -5,7 +5,7 @@ header {
 
   display: flex;
   align-items: center;
-  padding: 0px 4px;
+  padding: 0px 8px;
 }
 
 /*
@@ -37,7 +37,7 @@ header .search-bar {
 
   background-color: white;
   border: 1px solid rgba(238, 143, 159, 0.9);
-;
+
   border-left-width: 0px; /* no overlap */
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;

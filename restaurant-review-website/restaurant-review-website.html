@@ -101,26 +101,41 @@
           <div class="restaurant-name-label">Restaurant Name</div>
           <div class="restaurant-rating-label">Rating</div>
 
-          <input id="restaurant-name-input">
-          <input id="rating-input">
+          <input id="restaurant-name-input" placeholder="eg: McDonald's">
+          <input id="rating-input" placeholder="-">
           
           <div class="username-label">Username</div>
-          <input id="username-input">
+          <input id="username-input" placeholder="eg: lvl220munchlax" spellcheck="false">
 
           <div class="description-label">Description</div>
-          <textarea id="description-input"></textarea>
+          <textarea id="description-input" placeholder="Optional, but encouraged!" spellcheck="false"></textarea>
+
+          <div id="form-error-message"></div>
 
           <div id="form-buttons">
             <button id="form-submit-button">Submit</button>
             <button id="form-clear-button">Clear</button>
           </div>
 
-          <div id="form-error-message"></div>
-
           <div id="form-exit-button">X</div>
         </div>
 
         <div id="posts">
+          <div class="post">
+            <div class="rating rating5">93</div>
+            <div class="restaurant-name">Halal Bros Grill</div>
+            <div class="username">@yusuf</div>
+            <div class="description">Food is very halal. </div>
+
+            <div class="post-time">2 minutes ago</div>
+            <button class="bookmark-button">
+              <img class="bookmark-icon" src="images/unactive-bookmark.png">
+            </button>
+
+            <div class="post-stats">
+                
+            </div>
+          </div>
 
         </div>
     </div>

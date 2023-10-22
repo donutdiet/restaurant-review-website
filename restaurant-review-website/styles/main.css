@@ -13,12 +13,13 @@ body {
   box-sizing: border-box;
 }
 #home-layout-grid header {
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
   grid-column: 1 / 3;
   grid-row: 1 / 2;
+  background-color: white; /* no bleed */
 }
 #home-layout-grid #sidebar {
-  border-right: 1px solid black;
+  /* border-right: 1px solid black; */
   grid-column: 1 / 2;
   grid-row: 2 / 3;
 }
@@ -28,6 +29,8 @@ body {
   grid-row: 1 / 3;
 }
 #home-layout-grid .body {
+  /* border: 1px solid black; */
   grid-column: 2 / 3;
   grid-row: 2 / 3;
+  padding: 0 5px;
 }
