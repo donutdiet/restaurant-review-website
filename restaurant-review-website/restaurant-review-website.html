@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/sidebar.css">
     <link rel="stylesheet" href="styles/infobar.css">
-    <!-- <link rel="stylesheet" href="styles/posts.css">
+    <link rel="stylesheet" href="styles/posts.css">
     <link rel="stylesheet" href="styles/replyinput.css">
-    <link rel="stylesheet" href="styles/replies.css"> -->
+    <link rel="stylesheet" href="styles/replies.css">
     <link rel="stylesheet" href="styles/main.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,31 +96,29 @@
         </div>
 
         <div id="add-post-form">
-          <div class="form-header">
-            <label id="restaurant-name-input-label">Restaurant Name</label>
-            <input id="restaurant-name-input" placeholder="eg: Bibibop">
-    
-            <div class="rating-container">
-              <label id="rating-input-label">Rating</label>
-              <input id="rating-input" placeholder="-">
-            </div>
-    
-            <button id="form-exit-button">X</button>
-          </div>
-    
-          <label id="username-input-label">Username</label>
-          <input id="username-input" placeholder="eg: donutdiet">
-    
-          <label id="description-input-label">Description</label>
-          <textarea id="description-input" placeholder="Optional, but encouraged!"></textarea>
-    
-          <div id="form-error-message"></div>
-    
-          <div class="form-buttons">
+          <div class="restaurant-name-label">Restaurant Name</div>
+          <div class="restaurant-rating-label">Rating</div>
+
+          <input id="restaurant-name-input">
+          <input id="rating-input">
+          
+          <div class="username-label">Username</div>
+          <input id="username-input">
+
+          <div class="description-label">Description</div>
+          <textarea id="description-input"></textarea>
+
+          <div id="form-buttons">
             <button id="form-submit-button">Submit</button>
             <button id="form-clear-button">Clear</button>
           </div>
+
+          <div id="form-error-message"></div>
+
+          <div id="form-exit-button">X</div>
         </div>
+
+        <div id="posts"></div>
       </div>
 
     </div>

@@ -1,133 +1,95 @@
 #add-post-form {
-  background-color: rgb(255, 218, 218);
-  color: black;
-  font-family: Roboto;
   position: fixed;
-  padding: 35px 15px 12px 15px;
-  border: 3px solid rgba(238, 143, 159, 0.9);
-  border-radius: 10px;
+  position: absolute;
   top: 120px;
   left: 27%;
   right: 28%;
   z-index: 1;
-}
-.not-visible {
-  display: none;
-}
 
-#add-post-form ::placeholder {
-  color: rgb(204, 204, 204);
-  font-size: 16px;
-}
+  display: none; /* changes to grid with js */
+  grid-template-columns: 1fr 50px;
+  grid-template-rows: 15px 35px 15px 35px 15px 100px 45px;
+  padding: 10px;
 
-input,
-textarea {
+
+  background-color: rgb(255, 218, 218);
   color: black;
+  font-size: 12px;
   font-family: Roboto;
-  resize: none;
-}
-
-.form-header{
-  display: flex;
-  position: relative;
-  margin-bottom: 20px;
-}
-
-#restaurant-name-input-label {
-  position: absolute;
-  top: -14px;
-  left: 2px;
-  font-size: 12px;
-}
-#restaurant-name-input {
-  flex: 12;
-  margin-right: 8px;
-  height: 25px;
+  font-weight: bold;
   border: 3px solid rgba(238, 143, 159, 0.9);
-  border-radius: 6px;
+  border-radius: 10px;
+}
+#add-post-form div {
+}
+#add-post-form .restaurant-name-label {
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+  padding-left: 2px;
+}
+#add-post-form .restaurant-rating-label {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+
+  justify-self: center;
+}
+#add-post-form #restaurant-name-input {
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
+  margin-right: 6px;
+
   font-size: 16px;
   font-weight: bold;
-  outline: none;
-  min-width: 0; /* for resizing window */
+  min-width: 0; /* proper resizing */
 }
+#add-post-form #rating-input {
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
 
-.rating-container {
-  display: flex;
-  align-items: center;
-  margin-top: -14px;
-  flex: 1;
-  height: 4ypx;
-  flex-direction: column;
-}
-
-#rating-input-label {
-  font-size: 12px;
-}
-#rating-input {
-  flex: 1;
-  height: 25px;
-  border: 3px solid rgba(238, 143, 159, 0.9);
-  border-radius: 6px;
   font-size: 16px;
   font-weight: bold;
   text-align: center;
-  outline: none;
 }
+#add-post-form .username-label {
+  grid-row: 3 / 4;
+  grid-column: 1 / 3;
+  padding-left: 2px;
+}
+#add-post-form #username-input {
+  grid-row: 4 / 5;
+  grid-column: 1 / 3;
 
-#form-exit-button {
-  background-color: rgba(238, 143, 159, 0.95);
-  color: white;
-  position: absolute;
-  top: -35.25px;
-  right: -15.25px;
-  width: 24px;
-  height: 24px;
-  border: none;
-  border-top-right-radius: 6px;
-  border-bottom-left-radius: 6px;
-  text-align: center;
-  cursor: pointer;
-}
-
-#username-input-label {
-  position: absolute;
-  top: 74px;
-  left: 17px;
-  font-size: 12px;
-}
-#username-input {
-  width: 97.5%;
-  margin-bottom: 20px;
-  height: 25px;
-  border: 3px solid rgb(238, 143, 159);
-  border-radius: 6px;
   font-size: 16px;
-  outline: none;
 }
+#add-post-form .description-label {
+  grid-row: 5 / 6;
+  grid-column: 1 / 3;
+  padding-left: 2px;
+}
+#add-post-form #description-input {
+  grid-row: 6 / 7;
+  grid-column: 1 / 3;
 
-#description-input-label {
-  position: absolute;
-  left: 18px;
-  top: 126px;
-  font-size: 12px;
-}
-#description-input {
-  font-size: 16px;
-  height: 23px;
-  width: 97.5%;
-  border: 3px solid rgba(238, 143, 159, 0.9);
-  border-radius: 6px;
+  font-family: Roboto;
+  font-size: 14px;
   resize: none;
+}
+#form-buttons {
+  grid-row: 7 / 8;
+  grid-column: 1 / 3;
+}
+
+#add-post-form #restaurant-name-input,
+#add-post-form #rating-input,
+#add-post-form #username-input,
+#add-post-form #description-input {
+  padding-left: 4px;
+  border: 2px solid rgba(238, 143, 159, 0.9);
+  border-radius: 4px;
   outline: none;
 }
 
-#form-error-message{
-  color: black;
-  text-align: center;
-  margin: 6px 9px 0 0;
-}
-
-.form-buttons {
+#form-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,7 +99,6 @@ textarea {
 
 #form-submit-button {
   background-color: rgba(238, 143, 159, 0.9);
-  color: white;
   font-weight: bold;
   width: 70px;
   height: 35px;
@@ -153,14 +114,34 @@ textarea {
   border: none;
   cursor: pointer;
 }
-
-#form-exit-button:hover,
 #form-submit-button:hover,
 #form-clear-button:hover {
   background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
 }
-#form-exit-button:active,
 #form-submit-button:active,
 #form-clear-button:active {
   background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
+}
+
+#form-exit-button {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 12px;
+  text-align: center;
+  
+  background-color: white;
+  color: rgba(238, 143, 159, 0.95);
+  font-weight: bold;
+  border: 2px solid rgba(238, 143, 159, 0.90);
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 6px;
+  user-select: none;
+  cursor: pointer;
+}
+#form-exit-button:hover {
+  background-color: rgb(255, 235, 235);
+}
+#form-exit-button:active {
+  background-color: rgb(255, 218, 218);
 }

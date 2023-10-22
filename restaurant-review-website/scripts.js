@@ -334,12 +334,12 @@ function toggleDisplayById(elementId) {
 
 // Change the state of the form
 function openForm() {
-  const formClassList = document.getElementById('add-post-form').classList;
-  formClassList.remove('not-visible');
+  const form = document.getElementById('add-post-form');
+  form.style.display = "grid";
 }
 function closeForm() {
-  const formClassList = document.getElementById('add-post-form').classList;
-  formClassList.add('not-visible');
+  const form = document.getElementById('add-post-form');
+  form.style.display = "none";
   document.getElementById('form-error-message').innerHTML = '';
   clearForm();
 }
