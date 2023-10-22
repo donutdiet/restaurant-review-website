@@ -58,29 +58,31 @@
         </div>
       </nav>
 
-      <div class="tabs">
-        <input type="radio" id="info" name="tabs" checked="checked">
-        <label for="info">Info</label>
-        <div class="tab">
-          <div>User specific info like the elo based ranking system, trending restaurants and leaderboards</div>
-        </div>
-
-        <input type="radio" id="messages" name="tabs">
-        <label for="messages">Messages</label>
-        <div class="tab">
-          <div>User conversations</div>
-        </div>
+      <div id="infobar">
+        <div class="tabs">
+          <input type="radio" id="info" name="tabs" checked="checked">
+          <label for="info">Info</label>
+          <div class="tab">
+            <div>User specific info like the elo based ranking system, trending restaurants and leaderboards</div>
+          </div>
   
-        <input type="radio" id="notifications" name="tabs">
-        <label for="notifications">Notifications</label>
-        <div class="tab">
-          <div>All user notifications</div>
-        </div>
-  
-        <input type="radio" id="receipts" name="tabs">
-        <label for="receipts">Receipts</label>
-        <div class="tab">
-          <div>Currently under construction</div>
+          <input type="radio" id="messages" name="tabs">
+          <label for="messages">Messages</label>
+          <div class="tab">
+            <div>User conversations</div>
+          </div>
+    
+          <input type="radio" id="notifications" name="tabs">
+          <label for="notifications">Notifications</label>
+          <div class="tab">
+            <div>All user notifications</div>
+          </div>
+    
+          <input type="radio" id="receipts" name="tabs">
+          <label for="receipts">Receipts</label>
+          <div class="tab">
+            <div>Currently under construction</div>
+          </div>
         </div>
       </div>
 
@@ -118,68 +120,10 @@
           <div id="form-exit-button">X</div>
         </div>
 
-        <div id="posts"></div>
-      </div>
+        <div id="posts">
 
+        </div>
     </div>
-
-    <!-- <div id="posts">
-      <div class="post">
-        <div class="rating ${ratingColor}">93</div>
-        <div class="post-header">
-          <div class="restaurant-name">Halal Bros Grill</div>
-          <div class="post-time">2 months ago</div>
-          <div class="bs">
-            <img class="bookmark-icon" src="images/unactive-bookmark.png">
-            <div class="bs-tooltip">Bookmark</div>
-          </div>
-        </div>
-        <div class="username">@Furqan</div>
-        <div class="description">Food is very halal.</div>
-        <div class="image-grid">
-        </div>
-        <div class="post-stats">
-          <div class="reply-container">
-            <img class="reply-icon" src="images/replies.png">
-            <div>0</div>
-            <div class="tooltip">Reply</div>
-          </div>
-          <div class="like-container">
-            <img class="like-icon" src="images/unactive-like.png">
-            <div class=${likeCountTextColor}>0</div>
-            <div class="tooltip">Like</div>
-          </div>
-          <div class="share-container">
-            <img class="share-icon" src="images/share.png">
-            <div>0</div>
-            <div class="tooltip">Share</div>
-          </div>
-        </div>
-      </div>
-      <div class="replies">
-        <div class="post-reply-container">
-          <input class="reply-username-input" placeholder="Username">
-          <textarea class="comment-input" placeholder="Share your thoughts!"></textarea>
-          <div class="reply-buttons">
-            <button class="delete-replies-button">Delete</button>
-            <button class="send-reply-button">Send</button>
-          </div>
-        </div>
-        <div class="reply">
-          <div class="reply-header">
-            <div class="reply-username">@Majd &#183;</div>
-            <div class="reply-time">25 minutes</div>
-          </div>
-          <div class="reply-comment">ok buddy</div>
-          <div class="reply-stats">
-            <div class="like-container">
-              <img class="like-icon" src="images/unactive-like.png">
-              <div class=${likeCountTextColor}>0</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </body>
 
   <script src="scripts.js"></script>
