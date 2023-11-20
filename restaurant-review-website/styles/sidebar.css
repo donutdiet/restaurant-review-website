@@ -1,25 +1,24 @@
 #sidebar {
-  position: fixed;
-  top: 50px;
-  bottom: 0;
+  position: sticky;
+  top: 45px;
   width: 65px;
-
-  display: flex;
   flex-direction: column;
-  justify-content: start;
+  gap: 2px;
   align-items: center;
-  padding-top: 6px;
+  
+  font-family: var(--ff-roboto);
   font-size: 10px; 
   text-align: center;
 }
 
 .sidebar-container {
-  width: 80%;
+  width: 82%;
   padding: 10px 0;
   margin-bottom: 5px;
-  border: 1.5px solid rgba(238, 143, 159, 0.9);
+  border: 1.5px solid rgb( var(--clr-light) );
   border-radius: 10px;
-  color: rgba(238, 143, 159, 0.9);
+
+  color: rgb( var(--clr-light) );
   cursor: pointer;
 }
 .sidebar-container:hover {
@@ -29,16 +28,7 @@
   background-image: linear-gradient(rgba(238, 143, 159, 0.15) 0 0);
 }
 
-.home-icon,
-.profile-icon,
-.following-icon,
-.trending-icon,
-.bookmarks-icon,
-.receipts-icon,
-.settings-icon {
+.sidebar-container img {
   height: 32px;
-}
-
-.sidebar-label {
-  
+  justify-self: center;
 }

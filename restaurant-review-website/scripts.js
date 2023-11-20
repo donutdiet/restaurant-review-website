@@ -71,6 +71,12 @@ function OnInput() {
 // toggleDisplayById(document.getElementById('add-post-form'));
 dynamicTextarea();
 
+$.each( $('*'), function() { 
+  if( $(this).width() > $('body').width()) {
+      console.log("Wide Element: ", $(this), "Width: ", $(this).width()); 
+  } 
+});
+
 // ----------------------------------------------
 
 // Assigns the posts saved through local storage to posts or defaults to empty and renders the posts

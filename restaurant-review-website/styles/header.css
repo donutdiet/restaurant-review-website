@@ -1,17 +1,10 @@
 header {
   position: sticky;
   top: 0;
-  height: 100%; 
-
-  display: flex;
+  height: 45px;
   align-items: center;
   padding: 0px 8px;
 }
-
-/*
-.hamburger-icon {
-}
-*/
 
 header .logo {
   height: 75%;
@@ -20,33 +13,39 @@ header .logo {
 header .search-bar {
   height: 28px;
   width: 0; /* max shrink */
-  flex: 1;
+  flex: 5;
+  margin-right: 0px;
   padding-left: 8px;
   outline: none;
 
   font-size: 14px;
   border-top-left-radius: 13px;
   border-bottom-left-radius: 13px;
-  border: 1px solid rgba(238, 143, 159, 0.9);
+  border: 1px solid rgb( var(--clr-light) );
 }
 
-.search-button {
-  height: 31.6px;
+header .search-button {
+  height: 28px;
   width: 50px;
   cursor: pointer;
 
-  background-color: white;
-  border: 1px solid rgba(238, 143, 159, 0.9);
-
+  border: 1px solid rgb( var(--clr-light) );
   border-left-width: 0px; /* no overlap */
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
 }
-.search-button:active {
-  opacity: 0.85;
+header .search-button:hover {
+  background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
+}
+header .search-button:active {
+  background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
 }
 
-.search-icon {
-  padding-top: 2px;
-  height: 85%;
+header .search-icon {
+  justify-self: center;
+  height: 65%;
+}
+
+header marquee {
+  flex: 4;
 }

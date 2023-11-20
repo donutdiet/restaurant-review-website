@@ -1,12 +1,12 @@
 #posts {
-  border: 1px solid lightblue;
-  height: fit-content;
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
 }
 
 .post {
   display: grid;
   grid-template-columns: 52px 1fr 90px 60px;
-  grid-template-rows: 30px 22px 1fr 25px;
+  grid-template-rows: 30px 22px 1fr 30px;
   border: 1px solid black;
 }
 .post .rating {
@@ -15,8 +15,7 @@
   justify-self: center;
   align-self: center;
   padding: 7px;
-
-  border: 1px solid rgb(75, 75, 75);
+  border: 1px solid rgb(43, 43, 43);
   font-size: 20px;
   font-weight: bold;
 }
@@ -48,9 +47,44 @@
 .post .description {
   grid-column: 2 / 4;
   grid-row: 3 / 4;
-  margin-top: -6px;
+  margin-top: -5px;
   
   font-size: 15px;
+}
+
+.post .post-stats {
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+  place-items: center;
+  column-gap: 85px;
+  padding-left: 2px;
+
+  display: flex;
+}
+
+.post .like-button,
+.post .reply-button,
+.post .share-button {
+  background-size: auto;
+  background-repeat: no-repeat;
+  height: 22px;
+  width: 22px;
+  padding: 8px;
+
+  border: 1px solid black;
+  cursor: pointer;
+}
+.post .like-button {
+  background: url("/restaurant-review-website/images/active-like.png");
+  background-size: cover;
+}
+.post .reply-button {
+  background: url("/restaurant-review-website/images/replies.png");
+  background-size: cover;
+}
+.post .share-button {
+  background: url("/restaurant-review-website/images/share.png");
+  background-size: cover;
 }
 
 .post .post-time {
@@ -66,14 +100,12 @@
   grid-column: 4 / 5;
   grid-row: 1 / 2;
   justify-self: center;
-  height: 30px;
-  width: 30px;
-  background-color: white;
-  border: none;
-  cursor: pointer;
-}
-.post .bookmark-icon {
-  margin-top: -6px;
-  margin-left: -14px;
   height: 45px;
+  width: 45px;
+  margin-top: -4px;
+  border: none;
+
+  cursor: pointer;
+  background: url("/restaurant-review-website/images/unactive-bookmark.png");
+  background-size: cover;
 }
