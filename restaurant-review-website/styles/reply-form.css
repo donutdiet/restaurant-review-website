@@ -1,0 +1,71 @@
+.reply-form {
+  display: grid;
+  grid-template-columns: 1fr 60px;
+  grid-template-rows: 30px 1fr;
+  padding: 6px;
+
+  border: 1px solid black;
+  border-top: none;
+}
+
+.reply-username-input {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  padding-left: 2px;
+
+  border: none;
+  resize: none;
+  outline: none;
+}
+
+.reply-message-input {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  margin-right: 6px;
+
+  border: 1px solid black;
+  resize: none;
+  outline: none;
+  font-family: Roboto, Arial;
+  font-size: 15px;  
+}
+
+.reply-buttons {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3; 
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: flex-end;
+}
+
+.reply-clear-button {
+  background-color: rgba(173, 173, 173, 0.9);
+  color: white;
+  width: 60px;
+  height: 25px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.reply-send-button {
+  background-color: rgba(238, 143, 159, 0.9);
+  color: white;
+  width: 60px;
+  height: 25px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.reply-clear-button:hover,
+.reply-send-button:hover {
+  background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
+}
+.reply-clear-button:active,
+.reply-send-button:active {
+  background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
+}

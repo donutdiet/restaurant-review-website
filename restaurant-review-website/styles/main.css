@@ -1,0 +1,136 @@
+/* ------------------------ */
+/* Body Styles              */
+/* ------------------------ */
+
+body {
+  font-family: Roboto, Arial;
+}
+
+#main-layout-grid {
+  grid-template-columns: 65px 3fr 2fr;
+  grid-template-rows: 35px 1fr;
+  gap: 4px;
+  padding-right: 4px;
+}
+
+/* ------------------------ */
+/* Custom Properties        */
+/* ------------------------ */
+
+:root {
+  /* colors */
+  --clr-dark: 12 12 12;
+  --clr-light: 238 143 159;
+  --clr-white: 253 253 253;
+
+  /* font families */
+  --ff-roboto: "Roboto";
+}
+
+/* ------------------------ */
+/* Reset                    */
+/* ------------------------ */
+
+/* Box sizing */
+
+* {
+  box-sizing: border-box;
+}
+
+/* Reset margins */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+picture {
+  margin: 0;
+}
+
+/* Set up the body */
+
+body {
+  /* line-height: 1.5; */
+  min-height: 100vh;
+}
+
+/* Make images easier to work with */
+
+img, 
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Make forms easier to work with */
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ------------------------ */
+/* Utility Classes          */
+/* ------------------------ */
+
+/* General */
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.container {
+  /* relative to element's font size */
+  padding-inline: 2em; 
+  margin-inline: auto;
+  max-width: 80rem;
+}
+
+/* Colors */
+
+.bg-dark { background-color: rgb( var(--clr-dark) );}
+.bg-light { background-color: rgb( var(--clr-light) );}
+.bg-white { background-color: rgb( var(--clr-white) );}
+
+.text-dark { color: rgb( var(--clr-dark) );}
+.text-light { color: rgb( var(--clr-light) );}
+.text-white { color: rgb( var(--clr-white) );}
+
+/* ------------------------ */
+/* Misc Buttons             */
+/* ------------------------ */
+
+.button-row {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+#add-entry-button {
+  font-size: 12px;
+  border: none;
+  cursor: pointer; 
+  transition: opacity 0.1s;
+  position: fixed;
+  right: 40px;
+  bottom: 44px;
+  font-size: 16px;
+  padding: 30px 20px;
+  border-radius: 34px;
+  z-index: 1;
+}
+#add-entry-button:hover {
+  background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
+}
+#add-entry-button:active {
+  background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
+}

@@ -1,0 +1,44 @@
+.info-section {
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
+  position: sticky;
+  height: fit-content;
+  top: 12px;
+  padding: 2px 8px;
+  height: fit-content;
+  min-height: 500px;
+  
+  font-family: var(--ff-roboto);
+  border: 1px solid black;
+}
+
+.info-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+}
+
+.info-section input[type="radio"] {
+  display: none;
+}
+
+.info-section label {
+  padding: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  height: fit-content;
+}
+
+.info-section .content {
+  display: none;
+  width: 100%;
+  padding: 4px;
+  order: 1;
+}
+
+.info-section input[type="radio"]:checked + label {
+  color: rgb( var(--clr-light) );
+}
+.info-section input[type="radio"]:checked + label + .content {
+  display: block;
+}

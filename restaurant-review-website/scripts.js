@@ -56,33 +56,43 @@ function addReplyEventListeners() {
 
 // For dynamic textareas
 function dynamicTextarea() {
-  const tx = document.getElementsByTagName("textarea");
-  for (let i = 0; i < tx.length; i++) {
-    tx[i].addEventListener("input", OnInput, false);
+  const textarea = document.getElementsByTagName("textarea");
+  for (let i = 0; i < textarea.length; i++) {
+    textarea[i].addEventListener("input", OnInput, false);
   }
 }
 function OnInput() {
-  this.style.height = 0;
-  this.style.height = (this.scrollHeight) + "px";
+  if(this.clientHeight < this.scrollHeight) {
+    this.style.height = 0;
+    this.style.height = (this.scrollHeight) + "px";
+  }
 }
 // scrollHeight does not work on display: none elements so need to add this after
-toggleDisplayById(document.getElementById('add-post-form'));
+// toggleDisplayById(document.getElementById('add-post-form'));
+dynamicTextarea();
+
+$.each( $('*'), function() { 
+  if( $(this).width() > $('body').width()) {
+      console.log("Wide Element: ", $(this), "Width: ", $(this).width()); 
+  } 
+});
 
 // ----------------------------------------------
 
 // Assigns the posts saved through local storage to posts or defaults to empty and renders the posts
-const posts = JSON.parse(localStorage.getItem('posts')) || [];
+// const posts = JSON.parse(localStorage.getItem('posts')) || [];
 
-for(let i=0; i<posts.length; i++) {
-  posts[i].replyStatus = false;
-}
-renderPostsAndReplies(0, posts.length);
-console.log(posts);
+// for(let i=0; i<posts.length; i++) {
+//   posts[i].replyStatus = false;
+// }
+// renderPostsAndReplies(0, posts.length);
+// console.log(posts);
 
 // ----------------------------------------------
 
 // Functions used during the process of adding an entry
 function addPost() {
+  
   const restaurantNameObject = document.getElementById('restaurant-name-input');
   const restaurantName = restaurantNameObject.value;
 
@@ -260,7 +270,7 @@ function getPostHTML(start, end) {
         <div class="rating ${ratingColor}">${rating}</div>
         <div class="post-header">
           <div class="restaurant-name">${name}</div>
-          <div class="time">2 months ago</div>
+          <div class="post-time">2 months ago</div>
           <div class="bs">
             <img class="bookmark-icon" src=${bookmarkImg}>
             <div class="bs-tooltip">Bookmark</div>
@@ -270,7 +280,7 @@ function getPostHTML(start, end) {
         <div class="description">${description}</div>
         <div class="image-grid">
         </div>
-        <div class="stats">
+        <div class="post-stats">
           <div class="reply-container">
             <img class="reply-icon" src="images/replies.png">
             <div>${replyCount}</div>
@@ -304,11 +314,9 @@ function getReplyHTML(index) {
   </div>`
   for(let i=0; i<posts[index].replies.length; i++) {
     html += 
-      `<div class="replies">
-        <div class="reply">
-          <div class="reply-username">@${posts[index].replies[i].username}</div>
-          <div class="reply-comment">${posts[index].replies[i].comment}</div>
-        </div>
+      `<div class="reply">
+        <div class="reply-username">@${posts[index].replies[i].username}</div>
+        <div class="reply-comment">${posts[index].replies[i].comment}</div>
       </div>`
   }
   return html;
@@ -326,22 +334,22 @@ function deleteReplies(index) {
   renderPostsAndReplies(0, posts.length);
 }
 
-function toggleDisplayById(elementId) {
-  if(elementId.classList.contains('not-visible')) {
-    elementId.classList.remove('not-visible');
-  } else {
-    elementId.classList.add('not-visible');
-  }
-}
+// function toggleDisplayById(elementId) {
+//   if(elementId.classList.contains('not-visible')) {
+//     elementId.classList.remove('not-visible');
+//   } else {
+//     elementId.classList.add('not-visible');
+//   }
+// }
 
 // Change the state of the form
 function openForm() {
-  const formClassList = document.getElementById('add-post-form').classList;
-  formClassList.remove('not-visible');
+  const form = document.getElementById('add-post-form');
+  form.style.display = "grid";
 }
 function closeForm() {
-  const formClassList = document.getElementById('add-post-form').classList;
-  formClassList.add('not-visible');
+  const form = document.getElementById('add-post-form');
+  form.style.display = "none";
   document.getElementById('form-error-message').innerHTML = '';
   clearForm();
 }

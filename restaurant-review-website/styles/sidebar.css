@@ -1,34 +1,34 @@
-.sidebar {
-  color: rgba(238, 143, 159, 0.9);
-  position: fixed;
-  left: 0;
-  top: 50px;
-  bottom: 0;
+#sidebar {
+  position: sticky;
+  top: 45px;
   width: 65px;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  
+  font-family: var(--ff-roboto);
+  font-size: 10px; 
   text-align: center;
-  font-family: Roboto;
-  font-size: 10px;
-  padding-top: 0px;
 }
 
 .sidebar-container {
+  width: 82%;
   padding: 10px 0;
+  margin-bottom: 5px;
+  border: 1.5px solid rgb( var(--clr-light) );
   border-radius: 10px;
+
+  color: rgb( var(--clr-light) );
   cursor: pointer;
 }
 .sidebar-container:hover {
-  background-image: linear-gradient(rgb(70 70 70/40%) 0 0);
+  background-image: linear-gradient(rgba(238, 143, 159, 0.075) 0 0);
 }
 .sidebar-container:active {
-  background-image: linear-gradient(rgb(70 70 70/80%) 0 0);
+  background-image: linear-gradient(rgba(238, 143, 159, 0.15) 0 0);
 }
 
-.home-icon,
-.profile-icon,
-.following-icon,
-.trending-icon,
-.bookmarks-icon,
-.receipts-icon,
-.settings-icon {
+.sidebar-container img {
   height: 32px;
+  justify-self: center;
 }

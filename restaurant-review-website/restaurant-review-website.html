@@ -1,148 +1,164 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <hmtl>
 
-  <head>
-    <title>Munch Review</title>
-    <link rel="stylesheet" href="styles/general.css">
-    <link rel="stylesheet" href="styles/form.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/sidebar.css">
-    <link rel="stylesheet" href="styles/infobar.css">
-    <link rel="stylesheet" href="styles/posts.css">
-    <link rel="stylesheet" href="styles/replies.css">
+<head>
+  <title>Munch Review</title>
+  <link rel="stylesheet" href="styles/add-post-form.css">
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/sidebar.css">
+  <link rel="stylesheet" href="styles/info-section.css">
+  <link rel="stylesheet" href="styles/posts.css">
+  <link rel="stylesheet" href="styles/reply-form.css">
+  <link rel="stylesheet" href="styles/replies.css">
+  <link rel="stylesheet" href="styles/main.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!--No clue what this is; got it from stack overflow to fix @media screen-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
+  <!--No clue what this is; got it from stack overflow to fix @media screen-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-  <body>
-    <div class="button-row">
-      <!--SO THE POSITION ABSOLUTE REFRESH BUTTON ISN'T ABOVE THE HEADER -->
-      <button class="filter-button">Filter</button>
-      <button class="sort-button">Sort</button>
-      <button class="refresh-button">Refresh</button>
-      <button id="delete-button">Delete</button>
+<body>
+  <header class="flex bg-white">
+    <img class="logo" src="images/logo.png">
+    <input class="search-bar" type="text" placeholder="Search">
+    <button class="search-button grid bg-white">
+      <img class="search-icon" src="images/search-icon.png">
+    </button>
+    <marquee>Promotion</marquee>
+  </header>
 
-      <button id="add-entry-button">+ Add an entry</button>
+  <div id="add-post-form">
+    <div class="restaurant-name-label">Restaurant Name</div>
+    <div class="restaurant-rating-label">Rating</div>
+
+    <input id="restaurant-name-input" placeholder="eg: McDonald's">
+    <input id="rating-input" placeholder="-">
+    
+    <div class="username-label">Username</div>
+    <input id="username-input" placeholder="eg: lvl220munchlax" spellcheck="false">
+
+    <div class="description-label">Description</div>
+    <textarea id="description-input" placeholder="Optional, but encouraged!" spellcheck="false"></textarea>
+
+    <div id="form-error-message"></div>
+
+    <div id="form-buttons">
+      <button id="form-submit-button">Submit</button>
+      <button id="form-clear-button">Clear</button>
     </div>
 
-    <div class="header">
-      <div class="left-section">
-        <img class="logo" src="images/logo.png">
-      </div>
-      <div class="middle-section">
-        <input class="search-bar" type="text" placeholder="Search">
-        <button class="search-button">
-          <img class="search-icon" src="images/search-icon.png">
-        </button>
-      </div>
-      <!-- <div class="right-section">
-        <div class="header-container">
-          <img class="messages-icon" src="images/messages.png">
-          <div class="tooltip">Messages</div>
-        </div>
-        <div class="header-container">
-          <img class="notifications-icon" src="images/notifications.png">
-          <div class="tooltip">Notifications</div>
-        </div>
-        <div class="header-container">
-          <img class="receipts-icon" src="images/receipts.png">
-          <div class="tooltip">Receipts</div>
-        </div>
-      </div> -->
-    </div>
+    <div id="form-exit-button">X</div>
+  </div>
 
-    <div class="sidebar">
-      <div class="sidebar-container">
+  <div id="main-layout-grid" class="grid">
+    <nav id="sidebar" class="flex bg-white">
+      <div class="sidebar-container grid">
         <img class="home-icon" src="images/home.png">
-        <div class="sidebar-label">Home</div>
+        Home
       </div>
-      <div class="sidebar-container">
+      <div class="sidebar-container grid">
         <img class="profile-icon" src="images/profile.png">
-        <div class="tooltip">Profile</div>
+        Profile
       </div>
-      <div class="sidebar-container">
+      <div class="sidebar-container grid">
         <img class="following-icon" src="images/following.png">
-        <div class="sidebar-label">Following</div>
+        Following
       </div>
-      <div class="sidebar-container">
+      <div class="sidebar-container grid">
         <img class="trending-icon" src="images/trending.png">
-        <div class="sidebar-label">Trending</div>
+        Trending
       </div>
-      <div class="sidebar-container">
+      <div class="sidebar-container grid">
         <img class="bookmarks-icon" src="images/active-bookmark.png">
-        <div class="sidebar-label">Bookmarks</div>
+        Bookmarks
       </div>
-      <div class="sidebar-container">
+      <div class="sidebar-container grid">
         <img class="settings-icon" src="images/settings.png">
-        <div class="tooltip">Settings</div>
+        Settings
       </div>
-    </div>
+    </nav>
 
-    <div class="infobar">
-      <div class="tabs">
-        <input type="radio" id="info" name="tabs" checked="checked">
-        <label for="info">Info</label>
-        <div class="tab">
-          <div>User specific info like the elo based ranking system, trending restaurants and leaderboards</div>
-        </div>
-
-        <input type="radio" id="messages" name="tabs">
-        <label for="messages">Messages</label>
-        <div class="tab">
-          <div>User conversations</div>
-        </div>
-  
-        <input type="radio" id="notifications" name="tabs">
-        <label for="notifications">Notifications</label>
-        <div class="tab">
-          <div>All user notifications</div>
-        </div>
-  
-        <input type="radio" id="receipts" name="tabs">
-        <label for="receipts">Receipts</label>
-        <div class="tab">
-          <div>Currently under construction</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="add-post-form">
-      <div class="form-header">
-        <label id="restaurant-name-input-label">Restaurant Name</label>
-        <input id="restaurant-name-input" placeholder="eg: Bibibop">
-
-        <div class="rating-container">
-          <label id="rating-input-label">Rating</label>
-          <input id="rating-input" placeholder="-">
-        </div>
-
-        <button id="form-exit-button">X</button>
-      </div>
-
-      <label id="username-input-label">Username</label>
-      <input id="username-input" placeholder="eg: donutdiet">
-
-      <label id="description-input-label">Description</label>
-      <textarea id="description-input" placeholder="Optional, but encouraged!"></textarea>
-
-      <div id="form-error-message"></div>
-
-      <div class="form-buttons">
-        <button id="form-submit-button">Submit</button>
-        <button id="form-clear-button">Clear</button>
-      </div>
+    <div class="button-row">
+      <button>Filter</button>
+      <button>Sort</button>
+      <button>Refresh</button>
+      <button id="delete-button">Delete</button>
+      <button id="add-entry-button" class="text-white bg-light">+ Add an entry</button>
     </div>
 
     <div id="posts">
+      <div class="post">
+        <div class="rating rating5">93</div>
+        <div class="restaurant-name">Halal Bros Grill</div>
+        <div class="username">@mujd</div>
+        <div class="description">Food is very halal.</div>
+  
+        <div class="post-stats">
+          <button class="like-button">
+          <button class="reply-button"></button>
+          </button><button class="share-button"></button>
+        </div>
+  
+        <div class="post-time">2 minutes ago</div>
+        <button class="bookmark-button"></button>
+      </div>
       <div class="replies">
+        <div class="reply-form">
+          <input class="reply-username-input" placeholder="Username">
+          <textarea class="reply-message-input" placeholder="Share your thoughts!"></textarea>
+  
+          <div class="reply-buttons">
+            <button class="reply-clear-button">Clear</button>
+            <button class="reply-send-button">Send</button>
+          </div>
+        </div>
+        <div class="reply">
+          <div class="reply-username">
+            <strong>@Al-Furqan</strong> &#xB7;
+            <span class="reply-date">Nov 2</span>
+          </div>
+          <div class="reply-message">
+            Wow great review habibi!
+          </div>
+          <div class="reply-stats">
+            <button class="reply-like-button">
+            <button class="reply-reply-button"></button>
+          </div>
+        </div>
+      </div>   
+    </div>
+
+    <div class="info-section">
+      <input type="radio" id="info" name="tabs" checked="checked">
+      <label for="info">Info</label>
+      <div class="content">
+        <div>User specific info like the elo based ranking system, trending restaurants and leaderboards
+        </div>
+      </div>
+  
+      <input type="radio" id="messages" name="tabs">
+      <label for="messages">Messages</label>
+      <div class="content">
+        <div>User conversations</div>
+      </div>
+  
+      <input type="radio" id="notifications" name="tabs">
+      <label for="notifications">Notifications</label>
+      <div class="content">
+        <div>All user notifications</div>
+      </div>
+  
+      <input type="radio" id="receipts" name="tabs">
+      <label for="receipts">Receipts</label>
+      <div class="content">
+        <div>Currently under construction</div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 
-  <script src="scripts.js"></script>
+<script src="scripts.js"></script>
 </hmtl>
