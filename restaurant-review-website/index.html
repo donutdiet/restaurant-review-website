@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/sidebar.css">
+  <link rel="stylesheet" href="styles/post-form.css">
+  <link rel="stylesheet" href="styles/posts-section.css">
+  <link rel="stylesheet" href="styles/replies.css">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Munch Review</title>
+</head>
+<body>
+<div class="display flex">
+  <nav class="sidebar flex">
+    <img class="logo" src="images/logo.png">
+    <a id="home-tab" class="flex">
+      <img src="images/home.png">
+      <div class="label text-light bold">Home</div>
+    </a>
+    <a class="flex">
+      <img src="images/following.png">
+      <div class="label text-light">Following</div>
+    </a>
+    <a class="flex">
+      <img src="images/trending.png">
+      <div class="label text-light">Trending</div>
+    </a>
+    <a class="flex">
+      <img src="images/active-bookmark.png">
+      <div class="label text-light">Bookmarks</div>
+    </a>
+    <a class="flex">
+      <img src="images/profile.png">
+      <div class="label text-light">Profile</div>
+    </a>
+    <a class="flex">
+      <img src="images/messages.png">
+      <div class="label text-light">Messages</div>
+    </a>
+    <a class="flex">
+      <img src="images/notifications.png">
+      <div class="label text-light">Notifications</div>
+    </a>
+    <a class="flex">
+      <img src="images/settings.png">
+      <div class="label text-light">Settings</div>
+    </a>
+    <button id="post-button" class="bg-light text-white bold">Post</button>
+  </nav>
+  <form id="post-form" class="text-dark bold">
+    <div class="restaurant-name-label">Restaurant Name</div>
+    <div class="restaurant-rating-label">Rating</div>
+
+    <input id="restaurant-name-input" placeholder="eg: McDonald's">
+    <input id="rating-input" placeholder="-">
+    
+    <div class="username-label">Username</div>
+    <input id="username-input" placeholder="eg: lvl220munchlax" spellcheck="false">
+
+    <div class="description-label">Description</div>
+    <textarea id="description-input" placeholder="Share your thoughts!" spellcheck="false"></textarea>
+
+    <div id="form-error-message"></div>
+
+    <div id="form-buttons">
+      <button type="button" id="form-submit-button" class="bg-light text-white">Submit</button>
+      <button type="button" id="form-clear-button">Clear</button>
+    </div>
+
+    <div id="form-exit-button" class="text-light">X</div>
+  </form>
+  <div class="posts-section">
+    <header class="flex bg-white">
+      <input class="search-bar" placeholder="Search">
+      <button>Filter</button>
+      <button>Sort</button>
+      <button id="delete-posts-button">Delete Posts (temp)</button>
+    </header>
+    <div id="posts" class="flex">
+      <!-- <div class="post">
+        <div class="rating text-rating-4 bold">93</div>
+        <div class="post-header">
+          <span class="bold">Halal Bros Grill</span>
+          <span style="color: dimgray;">@mujd &#183; Oct 12</span>
+        </div>
+        <div class="post-comment">
+          Food is very halal Alhamdulillah. This place is the best Wallahi.
+        </div>
+        <div class="post-stats flex">
+          <button class="like-button"></button>0
+          <button class="reply-button"></button>0
+          <button class="bookmark-button"></button>
+        </div>
+      </div> -->
+      <!-- <div class="reply-form flex">
+        <input class="reply-username-input" placeholder="Username">
+        <textarea class="comment-input" placeholder="Post your reply"></textarea>
+        <div class="reply-buttons flex">
+          <button class="delete-replies-button">Delete all replies (temp)</button>
+          <button class="send-reply-button">Send</button>
+        </div>
+      </div> -->
+      <!-- <div class="replies flex">
+        <div class="reply flex">
+          <div class="reply-header">
+            <span class="bold">@Furqan</span>
+            <span style="color: dimgray;">&#183; Oct 12</span>
+          </div>
+          <div class="comment">Mashallah! What a great review habibi!</div>
+          <div class="reply-stats flex">
+            <button class="like-button"></button>0
+            <button class="reply-button"></button>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <div class="info-section">user info section</div>
+</div>
+<script src="scripts.js"></script>
+</body>
+</html>

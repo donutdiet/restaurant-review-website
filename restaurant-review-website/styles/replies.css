@@ -1,52 +1,68 @@
-.reply {
-  display: flex;
+/* ------------------------ */
+/* Reply Form Styles        */
+/* ------------------------ */
+
+.reply-form {
   flex-direction: column;
-  padding: 6px 10px;
-  min-height: 60px;
-
-  font-family: Roboto, Arial;
-  border: 1px solid rgb(90, 90, 90);
-  border-top: none;
+  padding: 8px 44px 4px 44px;
+  border-bottom: 1px solid lightgray;
 }
 
-.reply-username {
-  height: 20px;
-  font-size: 15px;
-}
-.reply-date {
-  font-size: 12px;
-  color: rgb(59, 59, 59);
-  align-self: center;
+.reply-username-input,
+.comment-input {
+  height: fit-content;
+  border: none;
+  outline: none;
+  resize: none;
 }
 
-.reply-message {
-  flex: 1;
-  font-size: 14px;
-  margin-bottom: 8px;
+.reply-buttons {
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.send-reply-button {
+  padding: 6px 12px;
+  border-radius: 16px;
+  background-color: rgb( var(--clr-light) );
+  color: rgb( var(--clr-white) );
+  border: none;
+  cursor: pointer;
+}
+
+/* ------------------------ */
+/* Reply Styles             */
+/* ------------------------ */
+
+.replies {
+  flex-direction: column;
+}
+
+.reply {
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 45px;
+  border-bottom: 1px solid lightgray;
 }
 
 .reply-stats {
-  display: flex;
-  gap: 16px;
-  height: 20px;
+  align-items: center;
+  gap: 8px;
 }
 
-.reply-like-button,
-.reply-reply-button {
-  background-size: auto;
-  background-repeat: no-repeat;
-  height: 22px;
-  width: 22px;
-  padding: 8px;
-
+.reply-stats .like-button,
+.reply-stats .reply-button {
+  padding: 12px;
+  align-self: center;
+  border: none;
   border: 1px solid black;
   cursor: pointer;
 }
-.reply-like-button {
-  background: url("/restaurant-review-website/images/active-like.png");
+.reply-stats .like-button {
+  background: url("/images/unactive-like.png");
   background-size: cover;
 }
-.reply-reply-button {
-  background: url("/restaurant-review-website/images/replies.png");
+.reply-stats .reply-button {
+  background: url("/images/replies.png");
   background-size: cover;
 }
