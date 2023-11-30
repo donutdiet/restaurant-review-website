@@ -5,13 +5,22 @@
 // Posts Section Header 
 // temp
 document.getElementById("delete-posts-button").addEventListener("click", () => {
-  deletePosts();
+  deletePost();
 });
 
 // Sidebar Tabs 
 document.getElementById("home-tab").addEventListener("click", () => {
   renderPosts(0, posts.length);
 });
+
+// Post Functions
+function addPostEventListener() {
+  document.querySelectorAll(".post").forEach((post, index) => {
+    post.addEventListener("click", () => {
+      renderPostAndReplies(index);
+    })
+  })
+}
 
 // Post Form Buttons
 document.getElementById('post-button').addEventListener("click", () => {
@@ -37,6 +46,7 @@ document.getElementById('form-exit-button').addEventListener("click", () => {
 
 let posts = JSON.parse(localStorage.getItem("posts")) || [];
 renderPosts(0, posts.length);
+addPostEventListener();
 
 // ----------------------------- 
 // Post Form Functions               
@@ -145,14 +155,34 @@ function getPostsHTML(start, end) {
   return postHTML;
 }
 
-function renderPosts(start, end) {
-  const postsHTML = getPostsHTML(start, end);
-  console.log(postsHTML);
-  document.getElementById("posts").innerHTML = postsHTML;
+function getReplyFormHTML() {
+  const replyFormHTML = 
+    `<div class="reply-form flex">
+      <input class="reply-username-input" placeholder="Username">
+      <textarea class="comment-input" placeholder="Post your reply"></textarea>
+      <div class="reply-buttons flex">
+        <button class="delete-replies-button">Delete all replies (temp)</button>
+        <button class="send-reply-button">Send</button>
+      </div>
+    </div>`
+  return replyFormHTML;
 }
 
-function deletePosts() {
-  posts = [];
+function renderPosts(start, end) {
+  const postsHTML = getPostsHTML(start, end);
+  document.getElementById("posts").innerHTML = postsHTML;
+  addPostEventListener();
+}
+
+function renderPostAndReplies(index) {
+  let postAndRepliesHTML = getPostsHTML(index, index + 1);
+  postAndRepliesHTML += getReplyFormHTML();
+  console.log("this ran");
+  document.getElementById("posts").innerHTML = postAndRepliesHTML;
+}
+
+function deletePost() {
+  posts.shift();
   localStorage.setItem("posts", JSON.stringify(posts));
   renderPosts(0, posts.length);
 }
