@@ -11,6 +11,9 @@ document.getElementById("delete-posts-button").addEventListener("click", () => {
 // Sidebar Tabs 
 document.getElementById("home-tab").addEventListener("click", () => {
   renderPosts(0, posts.length);
+  display.state = "home";
+  display.index = -1;
+  localStorage.setItem("display", JSON.stringify(display));
 });
 
 // Post Functions
@@ -18,8 +21,11 @@ function addPostEventListener() {
   document.querySelectorAll(".post").forEach((post, index) => {
     post.addEventListener("click", () => {
       renderPostAndReplies(index);
-    })
-  })
+      display.state = "post";
+      display.index = index;
+      localStorage.setItem("display", JSON.stringify(display));
+    });
+  });
 }
 
 // Post Form Buttons
@@ -29,6 +35,7 @@ document.getElementById('post-button').addEventListener("click", () => {
 
 document.getElementById("form-submit-button").addEventListener("click", () => {
   submitPostForm();
+  localStorage.setItem("posts", JSON.stringify(posts));
 });
 
 document.getElementById("form-clear-button").addEventListener("click", () => {
@@ -44,9 +51,15 @@ document.getElementById('form-exit-button').addEventListener("click", () => {
 // Main Code   
 // ----------------------------- 
 
+let display = JSON.parse(localStorage.getItem("display")) || { state:"home", index:-1 };
 let posts = JSON.parse(localStorage.getItem("posts")) || [];
-renderPosts(0, posts.length);
-addPostEventListener();
+
+if(display.state == "home") {
+  renderPosts(0, posts.length);
+  addPostEventListener();
+} else if(display.state == "post") {
+  renderPostAndReplies(display.index, display.index + 1);
+}
 
 // ----------------------------- 
 // Post Form Functions               
@@ -76,7 +89,6 @@ function submitPostForm() {
     });
   
     console.log(posts);
-    localStorage.setItem("posts", JSON.stringify(posts));
   
     clearForm();
     closeForm();
@@ -171,13 +183,14 @@ function getReplyFormHTML() {
 function renderPosts(start, end) {
   const postsHTML = getPostsHTML(start, end);
   document.getElementById("posts").innerHTML = postsHTML;
+  console.log("posts rendered");
   addPostEventListener();
 }
 
 function renderPostAndReplies(index) {
   let postAndRepliesHTML = getPostsHTML(index, index + 1);
   postAndRepliesHTML += getReplyFormHTML();
-  console.log("this ran");
+  console.log("post and replies rendered");
   document.getElementById("posts").innerHTML = postAndRepliesHTML;
 }
 
