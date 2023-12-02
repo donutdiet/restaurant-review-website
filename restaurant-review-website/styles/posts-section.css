@@ -86,16 +86,16 @@ header .search-bar {
   margin-right: -4px;
 }
 .post-stats .like-button {
-  background: url("/images/unactive-like.png");
+  background: url("/restaurant-review-website/images/unactive-like.png");
   background-size: cover;
   border: 1px solid black;
 }
 .post-stats .reply-button {
-  background: url("/images/replies.png");
+  background: url("/restaurant-review-website/images/replies.png");
   background-size: cover;
   border: 1px solid black;
 }
 .post-stats .bookmark-button {
-  background: url("/images/unactive-bookmark.png");
+  background: url("/restaurant-review-website/images/unactive-bookmark.png");
   background-size: cover;
 }

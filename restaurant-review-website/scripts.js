@@ -28,6 +28,13 @@ function addPostEventListener() {
   });
 }
 
+// Reply Funcions
+function addSubmitReplyEventListener(index) {
+  document.querySelector(".send-reply-button").addEventListener("click", () => {
+    submitReplyForm(index);
+  });
+}
+
 // Post Form Buttons
 document.getElementById('post-button').addEventListener("click", () => {
   openPostForm();
@@ -56,7 +63,6 @@ let posts = JSON.parse(localStorage.getItem("posts")) || [];
 
 if(display.state == "home") {
   renderPosts(0, posts.length);
-  addPostEventListener();
 } else if(display.state == "post") {
   renderPostAndReplies(display.index, display.index + 1);
 }
@@ -74,7 +80,7 @@ function submitPostForm() {
   const username = document.getElementById("username-input").value;
   const description = document.getElementById("description-input").value;
 
-  if(formErrorCheck(restaurantName, restaurantRating, username, description)) {
+  if(postFormErrorCheck(restaurantName, restaurantRating, username, description)) {
     posts.unshift({
       name: restaurantName,
       rating: restaurantRating,
@@ -112,7 +118,7 @@ function getRatingColor(rating) {
   }
 }
 
-function formErrorCheck(name, rating, username, description) {
+function postFormErrorCheck(name, rating, username, description) {
   if(name.trim() === "") {
     document.getElementById("form-error-message").innerHTML = "Error: a restaurant name is required";
     return false;
@@ -139,7 +145,31 @@ function clearForm() {
 
 function openPostForm() {postForm.style.display = "grid"; }
 
-function closeForm() { postForm.style.display = "none"; }
+function closeForm() { 
+  clearForm();
+  document.getElementById("form-error-message").innerHTML = "";
+  postForm.style.display = "none"; 
+}
+
+// ----------------------------- 
+// Reply Form Functions               
+// ----------------------------- 
+
+function submitReplyForm(index) {
+  const replyUsername = document.querySelector(".reply-username-input").value;
+  const replyComment = document.querySelector(".comment-input").value;
+
+  if(replyUsername.trim() != "" && replyComment.trim() != "") {
+    posts[index].replies.unshift({
+      replyUsername: replyUsername,
+      comment: replyComment
+    })
+  }
+  
+  console.log(posts);
+
+  renderPostAndReplies(index);
+}
 
 // ----------------------------- 
 // DOM Manipulation Functions               
@@ -180,6 +210,26 @@ function getReplyFormHTML() {
   return replyFormHTML;
 }
 
+function getRepliesHTML(index) {
+  let repliesHTML = "";
+  for(let i=0; i<posts[index].replies.length; i++) {
+    const { replyUsername, comment } = posts[index].replies[i];
+    repliesHTML += 
+      `<div class="reply flex">
+        <div class="reply-header">
+          <span class="bold">@${replyUsername}</span>
+          <span style="color: dimgray;">&#183; Oct 12</span>
+        </div>
+        <div class="comment">${comment}</div>
+        <div class="reply-stats flex">
+          <button class="like-button"></button>0
+          <button class="reply-button"></button>
+        </div>
+      </div>`
+  }
+  return repliesHTML;
+}
+
 function renderPosts(start, end) {
   const postsHTML = getPostsHTML(start, end);
   document.getElementById("posts").innerHTML = postsHTML;
@@ -190,8 +240,10 @@ function renderPosts(start, end) {
 function renderPostAndReplies(index) {
   let postAndRepliesHTML = getPostsHTML(index, index + 1);
   postAndRepliesHTML += getReplyFormHTML();
+  postAndRepliesHTML += getRepliesHTML(index);
   console.log("post and replies rendered");
   document.getElementById("posts").innerHTML = postAndRepliesHTML;
+  addSubmitReplyEventListener(index);
 }
 
 function deletePost() {
