@@ -46,19 +46,19 @@
   gap: 8px;
 }
 
-.reply-stats .like-button,
-.reply-stats .reply-button {
+.r-like-button,
+.r-reply-button {
   padding: 12px;
   align-self: center;
   border: none;
   border: 1px solid black;
   cursor: pointer;
 }
-.reply-stats .like-button {
+.r-like-button {
   background: url("/restaurant-review-website/images/unactive-like.png");
   background-size: cover;
 }
-.reply-stats .reply-button {
+.r-reply-button {
   background: url("/restaurant-review-website/images/replies.png");
   background-size: cover;
 }

@@ -28,10 +28,11 @@ function addPostEventListener() {
   });
 }
 
-// Reply Funcions
-function addSubmitReplyEventListener(index) {
-  document.querySelector(".send-reply-button").addEventListener("click", () => {
-    submitReplyForm(index);
+function addPostLikeInteraction() {
+  document.querySelectorAll(".like-button").forEach((likeButton, index) => {
+    likeButton.addEventListener("click", e => {
+      likeButtonClicked(index); e.stopPropagation(); // Button overlaps with div.
+    });
   });
 }
 
@@ -53,6 +54,12 @@ document.getElementById('form-exit-button').addEventListener("click", () => {
   closeForm();
 });
 
+// Reply Funcions
+function addSubmitReplyEventListener(index) {
+  document.querySelector(".send-reply-button").addEventListener("click", () => {
+    submitReplyForm(index);
+  });
+}
 
 // ----------------------------- 
 // Main Code   
@@ -163,18 +170,17 @@ function submitReplyForm(index) {
     posts[index].replies.unshift({
       replyUsername: replyUsername,
       comment: replyComment
-    })
+    });
+    localStorage.setItem("posts", JSON.stringify(posts));
+    renderPostAndReplies(index);
   }
-  
-  console.log(posts);
-
-  renderPostAndReplies(index);
 }
 
 // ----------------------------- 
 // DOM Manipulation Functions               
 // ----------------------------- 
 
+// Post Functions
 function getPostsHTML(start, end) {
   let postHTML = "";
   for(let i=start; i<end; i++) {
@@ -197,13 +203,42 @@ function getPostsHTML(start, end) {
   return postHTML;
 }
 
+function renderPosts(start, end) {
+  const postsHTML = getPostsHTML(start, end);
+  document.getElementById("posts").innerHTML = postsHTML;
+  console.log("posts rendered");
+  addPostEventListener();
+  addPostLikeInteraction();
+}
+
+function deletePost() {
+  posts.shift();
+  localStorage.setItem("posts", JSON.stringify(posts));
+  renderPosts(0, posts.length);
+}
+
+function likeButtonClicked(index) {
+  if(posts[index].likeStatus) {
+    posts[index].likeCount--;
+    posts[index].likeStatus = false;
+    console.log("unliked post");
+  } else {
+    posts[index].likeCount++;
+    posts[index].likeStatus = true;
+    console.log("liked post");
+  }
+  localStorage.setItem("posts", JSON.stringify(posts));
+  renderPosts(0, posts.length);
+}
+
+// Reply Functions
 function getReplyFormHTML() {
   const replyFormHTML = 
     `<div class="reply-form flex">
       <input class="reply-username-input" placeholder="Username">
       <textarea class="comment-input" placeholder="Post your reply"></textarea>
       <div class="reply-buttons flex">
-        <button class="delete-replies-button">Delete all replies (temp)</button>
+        <button class="delete-replies-button">Delete reply (temp)</button>
         <button class="send-reply-button">Send</button>
       </div>
     </div>`
@@ -222,19 +257,12 @@ function getRepliesHTML(index) {
         </div>
         <div class="comment">${comment}</div>
         <div class="reply-stats flex">
-          <button class="like-button"></button>0
-          <button class="reply-button"></button>
+          <button class="r-like-button"></button>0
+          <button class="r-reply-button"></button>
         </div>
       </div>`
   }
   return repliesHTML;
-}
-
-function renderPosts(start, end) {
-  const postsHTML = getPostsHTML(start, end);
-  document.getElementById("posts").innerHTML = postsHTML;
-  console.log("posts rendered");
-  addPostEventListener();
 }
 
 function renderPostAndReplies(index) {
@@ -244,10 +272,4 @@ function renderPostAndReplies(index) {
   console.log("post and replies rendered");
   document.getElementById("posts").innerHTML = postAndRepliesHTML;
   addSubmitReplyEventListener(index);
-}
-
-function deletePost() {
-  posts.shift();
-  localStorage.setItem("posts", JSON.stringify(posts));
-  renderPosts(0, posts.length);
 }
