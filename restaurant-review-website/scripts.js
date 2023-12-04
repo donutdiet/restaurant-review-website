@@ -36,6 +36,22 @@ function addPostLikeInteraction() {
   });
 }
 
+function addSinglePostLikeInteraction(index) {
+  document.querySelector(".like-button").addEventListener("click", e => {
+    if(posts[index].likeStatus) {
+      posts[index].likeCount--;
+      posts[index].likeStatus = false;
+      console.log("unliked post");
+    } else {
+      posts[index].likeCount++;
+      posts[index].likeStatus = true;
+      console.log("liked post");
+    }
+    localStorage.setItem("posts", JSON.stringify(posts));
+    renderPostAndReplies(index);
+  })
+}
+
 // Post Form Buttons
 document.getElementById('post-button').addEventListener("click", () => {
   openPostForm();
@@ -272,4 +288,5 @@ function renderPostAndReplies(index) {
   console.log("post and replies rendered");
   document.getElementById("posts").innerHTML = postAndRepliesHTML;
   addSubmitReplyEventListener(index);
+  addSinglePostLikeInteraction(index);
 }
