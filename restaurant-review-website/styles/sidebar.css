@@ -1,34 +1,47 @@
-#sidebar {
+.sidebar {
   position: sticky;
-  top: 45px;
-  width: 65px;
+  top: 0;
+  height: 100vh;
+  min-width: fit-content;
+  padding: 6px 18px;
   flex-direction: column;
-  gap: 2px;
-  align-items: center;
-  
-  font-family: var(--ff-roboto);
-  font-size: 10px; 
-  text-align: center;
+  gap: 8px;
 }
 
-.sidebar-container {
-  width: 82%;
-  padding: 10px 0;
-  margin-bottom: 5px;
-  border: 1.5px solid rgb( var(--clr-light) );
-  border-radius: 10px;
-
-  color: rgb( var(--clr-light) );
+.logo {
+  width: 125px;
+  padding: 0 8px;
+  align-self: left;
+  float: left;
+  border-radius: 16px;
   cursor: pointer;
 }
-.sidebar-container:hover {
-  background-image: linear-gradient(rgba(238, 143, 159, 0.075) 0 0);
-}
-.sidebar-container:active {
-  background-image: linear-gradient(rgba(238, 143, 159, 0.15) 0 0);
+
+.sidebar a {
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 16px;
+  cursor: pointer;
 }
 
-.sidebar-container img {
-  height: 32px;
-  justify-self: center;
+.sidebar a .label {
+  align-self: center;
+  font-size: 17px;
+}
+
+.sidebar a img {
+  height: 4vh;
+}
+
+.sidebar .logo:hover,
+.sidebar a:hover {
+  background-image: linear-gradient(rgba(238, 143, 159, 0.12) 0 0);
+}
+
+.sidebar #post-button {
+  padding: 14px 0;
+  border-radius: 24px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
 }

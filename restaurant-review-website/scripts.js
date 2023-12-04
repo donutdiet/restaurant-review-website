@@ -1,361 +1,292 @@
-// Event listeners for home page elements
-document.getElementById('delete-button').addEventListener('click', () => {
-  deletePosts();
-});
-document.getElementById('add-entry-button').addEventListener('click', () => {
-  openForm();
+// ----------------------------- 
+// Event Listeners               
+// ----------------------------- 
+
+// Posts Section Header 
+// temp
+document.getElementById("delete-posts-button").addEventListener("click", () => {
+  deletePost();
 });
 
-// Event listeners for form elements
-document.getElementById('form-exit-button').addEventListener('click', () => {
-  closeForm();
+// Sidebar Tabs 
+document.getElementById("home-tab").addEventListener("click", () => {
+  renderPosts(0, posts.length);
+  display.state = "home";
+  display.index = -1;
+  localStorage.setItem("display", JSON.stringify(display));
 });
-document.getElementById('form-submit-button').addEventListener('click', () => {
-  addPost();
+
+// Post Functions
+function addPostEventListener() {
+  document.querySelectorAll(".post").forEach((post, index) => {
+    post.addEventListener("click", () => {
+      renderPostAndReplies(index);
+      display.state = "post";
+      display.index = index;
+      localStorage.setItem("display", JSON.stringify(display));
+    });
+  });
+}
+
+function addPostLikeInteraction() {
+  document.querySelectorAll(".like-button").forEach((likeButton, index) => {
+    likeButton.addEventListener("click", e => {
+      likeButtonClicked(index); e.stopPropagation(); // Button overlaps with div.
+    });
+  });
+}
+
+function addSinglePostLikeInteraction(index) {
+  document.querySelector(".like-button").addEventListener("click", e => {
+    if(posts[index].likeStatus) {
+      posts[index].likeCount--;
+      posts[index].likeStatus = false;
+      console.log("unliked post");
+    } else {
+      posts[index].likeCount++;
+      posts[index].likeStatus = true;
+      console.log("liked post");
+    }
+    localStorage.setItem("posts", JSON.stringify(posts));
+    renderPostAndReplies(index);
+  })
+}
+
+// Post Form Buttons
+document.getElementById('post-button').addEventListener("click", () => {
+  openPostForm();
 });
-document.getElementById('form-clear-button').addEventListener('click', () => {
+
+document.getElementById("form-submit-button").addEventListener("click", () => {
+  submitPostForm();
+  localStorage.setItem("posts", JSON.stringify(posts));
+});
+
+document.getElementById("form-clear-button").addEventListener("click", () => {
   clearForm();
 });
 
-// Add event listeners for post elements
-function addPostEventListeners() {
-  document.querySelectorAll('.like-icon').forEach((likeButton, index) => {
-    likeButton.addEventListener('click', () => {
-      likeButtonClicked(index);
-    });
-  });
-  document.querySelectorAll('.reply-icon').forEach((replyButton, index) => {
-    replyButton.addEventListener('click', () => {
-      replyButtonClicked(index);
-      addReplyEventListeners();
-    });
-  });
-}
-
-// Event listeners for dynamic reply form elements
-function addReplyEventListeners() {
-  document.querySelectorAll('.send-reply-button').forEach((sendReplyButton, queryIndex) => {
-    for(let i=0; i<posts.length; i++) {
-      if (posts[i].replyStatus) {
-        sendReplyButton.addEventListener('click', () => {
-          addReply(i, queryIndex);
-        });
-      }
-    }
-  });
-  document.querySelectorAll('.delete-replies-button').forEach((deleteRepliesButton, queryIndex) => {
-    for(let i=0; i<posts.length; i++) {
-      if (posts[i].replyStatus) {
-        deleteRepliesButton.addEventListener('click', () => {
-          deleteReplies(i);
-        });
-      }
-    }
-  });
-}
-
-// For dynamic textareas
-function dynamicTextarea() {
-  const textarea = document.getElementsByTagName("textarea");
-  for (let i = 0; i < textarea.length; i++) {
-    textarea[i].addEventListener("input", OnInput, false);
-  }
-}
-function OnInput() {
-  if(this.clientHeight < this.scrollHeight) {
-    this.style.height = 0;
-    this.style.height = (this.scrollHeight) + "px";
-  }
-}
-// scrollHeight does not work on display: none elements so need to add this after
-// toggleDisplayById(document.getElementById('add-post-form'));
-dynamicTextarea();
-
-$.each( $('*'), function() { 
-  if( $(this).width() > $('body').width()) {
-      console.log("Wide Element: ", $(this), "Width: ", $(this).width()); 
-  } 
+document.getElementById('form-exit-button').addEventListener("click", () => {
+  closeForm();
 });
 
-// ----------------------------------------------
+// Reply Funcions
+function addSubmitReplyEventListener(index) {
+  document.querySelector(".send-reply-button").addEventListener("click", () => {
+    submitReplyForm(index);
+  });
+}
 
-// Assigns the posts saved through local storage to posts or defaults to empty and renders the posts
-// const posts = JSON.parse(localStorage.getItem('posts')) || [];
+// ----------------------------- 
+// Main Code   
+// ----------------------------- 
 
-// for(let i=0; i<posts.length; i++) {
-//   posts[i].replyStatus = false;
-// }
-// renderPostsAndReplies(0, posts.length);
-// console.log(posts);
+let display = JSON.parse(localStorage.getItem("display")) || { state:"home", index:-1 };
+let posts = JSON.parse(localStorage.getItem("posts")) || [];
 
-// ----------------------------------------------
+if(display.state == "home") {
+  renderPosts(0, posts.length);
+} else if(display.state == "post") {
+  renderPostAndReplies(display.index, display.index + 1);
+}
 
-// Functions used during the process of adding an entry
-function addPost() {
-  
-  const restaurantNameObject = document.getElementById('restaurant-name-input');
-  const restaurantName = restaurantNameObject.value;
+// ----------------------------- 
+// Post Form Functions               
+// ----------------------------- 
 
-  const restaurantRatingObject = document.getElementById('rating-input');
-  const restaurantRating = restaurantRatingObject.value;
+const postForm = document.getElementById('post-form');
+
+function submitPostForm() {
+  const restaurantName = document.getElementById("restaurant-name-input").value;
+  const restaurantRating = document.getElementById("rating-input").value;
   const ratingColor = getRatingColor(restaurantRating);
+  const username = document.getElementById("username-input").value;
+  const description = document.getElementById("description-input").value;
 
-  const usernameObject = document.getElementById('username-input');
-  const username = usernameObject.value;
-
-  const descriptionObject = document.getElementById('description-input');
-  const description = descriptionObject.value;
-
-  if (restaurantName.trim() === '') {
-    formError('emptyRestaurantName');
-    return;
-  }
-  if (restaurantRating.trim().length === 0) {
-    formError('emptyRestaurantRating');
-    return
-  }
-  if (isNaN(restaurantRating) || restaurantRating < 1 || restaurantRating > 99) {
-    formError('invalidRestaurantRating');
-    return;
-  }
-  if (username.trim() === '') {
-    formError('emptyUsername');
-    return;
-  }
-
-  posts.unshift({
-    name: restaurantName,
-    rating: restaurantRating,
-    ratingColor: ratingColor,
-    username: username,
-    description: description,
-    replyCount: 0,
-    likeCount: 0,
-    shareCount: 0,
-    likeStatus: false,
-    replyStatus: false,
-    bookmarkStatus: false,
-    replies: [],
-    likeButtonImg: 'images/unactive-like.png',
-    bookmarkImg: 'images/unactive-bookmark.png',
-    likeCountTextColor: ''
-  });
-  console.log(posts);
-
-  // Updates the local storage variable as more posts get added
-  localStorage.setItem('posts', JSON.stringify(posts));
-
-  restaurantNameObject.value = '';
-  restaurantRatingObject.value = '';
-  usernameObject.value = '';
-  descriptionObject.value = '';
-
-  closeForm();
-  renderPostsAndReplies(0, posts.length);
-}
-function renderPosts(start, end) {
-  const postsHTML = getPostHTML(start, end);
-  document.getElementById('posts').innerHTML = postsHTML;
-  addPostEventListeners();
-}
-function formError(error) {
-  const errorMessageObject = document.getElementById('form-error-message');
-  if (error === 'emptyRestaurantName') {
-    errorMessageObject.innerHTML = '[a restaurant name is required]';
-  } else if (error === 'emptyRestaurantRating') {
-    errorMessageObject.innerHTML = '[a rating is required]';
-  } else if (error === 'invalidRestaurantRating') {
-    errorMessageObject.innerHTML = '[the rating must be a number from 1-99]';
-  } else if (error === 'emptyUsername') {
-    errorMessageObject.innerHTML = '[a username is required]';
+  if(postFormErrorCheck(restaurantName, restaurantRating, username, description)) {
+    posts.unshift({
+      name: restaurantName,
+      rating: restaurantRating,
+      ratingColor: ratingColor,
+      username: username,
+      description: description,
+      likeCount: 0,
+      replyCount: 0,
+      likeStatus: false,
+      bookmarkStatus: false,
+      replies: []
+    });
+  
+    console.log(posts);
+  
+    clearForm();
+    closeForm();
+    renderPosts(0, posts.length);
   }
 }
-function renderReplies(index) {
-  let repliesHTML = getPostHTML(0, index + 1);
-  repliesHTML += getReplyHTML(index);
-  repliesHTML += getPostHTML(index + 1, posts.length)
-  document.getElementById('posts').innerHTML = repliesHTML;
-  replyStatus = true;
 
-  addPostEventListeners();
+function getRatingColor(rating) {
+  if (rating < 3) {
+    return 'text-rating-0';
+  } else if (rating < 16) {
+    return 'text-rating-1';
+  } else if (rating < 50) {
+    return 'text-rating-2';
+  } else if (rating < 84) {
+    return 'text-rating-3';
+  } else if (rating < 97) {
+    return 'text-rating-4';
+  } else if (rating < 100) {
+    return 'text-light';
+  }
 }
 
-function addReply(index, queryIndex) {
-  let replyUsername = '';
-  let replyComment = '';
-  document.querySelectorAll('.reply-username-input').forEach((replyUsernameObject, index) => {
-    if(index == queryIndex) {
-      replyUsername = replyUsernameObject.value;
-    }
-  });
-  document.querySelectorAll('.comment-input').forEach((replyCommentObject, index) => {
-    if(index == queryIndex) {
-      replyComment = replyCommentObject.value;
-    }
-  });
-  if(replyUsername.trim() != '' && replyComment.trim() != '') {
+function postFormErrorCheck(name, rating, username, description) {
+  if(name.trim() === "") {
+    document.getElementById("form-error-message").innerHTML = "Error: a restaurant name is required";
+    return false;
+  } else if (rating.trim() === "") {
+    document.getElementById("form-error-message").innerHTML = "Error: a rating is required";
+    return false;
+  } else if (isNaN(rating) || rating < 1 || rating > 99) {
+    document.getElementById("form-error-message").innerHTML = "Error: the rating must be a whole number from 1-99 ";
+    return false;
+  } else if (username.trim() === "") {
+    document.getElementById("form-error-message").innerHTML = "Error: a username is required";
+    return false;
+  }
+  return true;
+}
+
+function clearForm() {
+  document.getElementById("restaurant-name-input").value = "";
+  document.getElementById("rating-input").value = "";
+  document.getElementById("username-input").value = "";
+  document.getElementById("description-input").value = "";
+  document.getElementById("form-error-message").innerHTML = "";
+}
+
+function openPostForm() {postForm.style.display = "grid"; }
+
+function closeForm() { 
+  clearForm();
+  document.getElementById("form-error-message").innerHTML = "";
+  postForm.style.display = "none"; 
+}
+
+// ----------------------------- 
+// Reply Form Functions               
+// ----------------------------- 
+
+function submitReplyForm(index) {
+  const replyUsername = document.querySelector(".reply-username-input").value;
+  const replyComment = document.querySelector(".comment-input").value;
+
+  if(replyUsername.trim() != "" && replyComment.trim() != "") {
     posts[index].replies.unshift({
-      username: replyUsername,
+      replyUsername: replyUsername,
       comment: replyComment
     });
-    posts[index].replyCount++;
-    renderPostsAndReplies(0, posts.length);
+    localStorage.setItem("posts", JSON.stringify(posts));
+    renderPostAndReplies(index);
   }
 }
-function renderPostsAndReplies(start, end) {
-  let combinedHTML = '';
+
+// ----------------------------- 
+// DOM Manipulation Functions               
+// ----------------------------- 
+
+// Post Functions
+function getPostsHTML(start, end) {
+  let postHTML = "";
   for(let i=start; i<end; i++) {
-    combinedHTML += getPostHTML(i, i + 1);
-    if(posts[i].replyStatus) {
-      combinedHTML += getReplyHTML(i);
-    }
+    const { name, rating, ratingColor, username, description, likeCount, replyCount} = posts[i];
+    postHTML += 
+      `<div class="post">
+        <div class="rating ${ratingColor} bold">${rating}</div>
+        <div class="post-header">
+          <span class="bold">${name}</span>
+          <span style="color: dimgray;">@${username} &#183; Oct 12</span>
+        </div>
+        <div class="post-comment">${description}</div>
+        <div class="post-stats flex">
+          <button class="like-button"></button>${likeCount}
+          <button class="reply-button"></button>${replyCount}
+          <button class="bookmark-button"></button>
+        </div>
+      </div>`
   }
-  document.getElementById('posts').innerHTML = combinedHTML;
-  addPostEventListeners();
-  addReplyEventListeners();
-  dynamicTextarea();
-
-  localStorage.setItem('posts', JSON.stringify(posts));
+  return postHTML;
 }
 
-// Update post stats (incomplete)
+function renderPosts(start, end) {
+  const postsHTML = getPostsHTML(start, end);
+  document.getElementById("posts").innerHTML = postsHTML;
+  console.log("posts rendered");
+  addPostEventListener();
+  addPostLikeInteraction();
+}
+
+function deletePost() {
+  posts.shift();
+  localStorage.setItem("posts", JSON.stringify(posts));
+  renderPosts(0, posts.length);
+}
+
 function likeButtonClicked(index) {
   if(posts[index].likeStatus) {
     posts[index].likeCount--;
     posts[index].likeStatus = false;
-    posts[index].likeButtonImg = 'images/unactive-like.png';
-    posts[index].likeCountTextColor = '';
+    console.log("unliked post");
   } else {
     posts[index].likeCount++;
     posts[index].likeStatus = true;
-    posts[index].likeButtonImg = 'images/active-like.png';
-    posts[index].likeCountTextColor = 'pink-text';
+    console.log("liked post");
   }
-  renderPostsAndReplies(0, posts.length);
-}
-function replyButtonClicked(index) {
-  if(posts[index].replyStatus) {
-    posts[index].replyStatus = false;
-  } else {
-    posts[index].replyStatus = true;
-  }
-  renderPostsAndReplies(0, posts.length);
-  dynamicTextarea();
-}
-
-// Restaurant rating color scale (bell curve)
-function getRatingColor(rating) {
-  if (rating < 3) {
-    return 'rating1';
-  } else if (rating < 16) {
-    return 'rating2';
-  } else if (rating < 50) {
-    return 'rating3';
-  } else if (rating < 84) {
-    return 'rating4';
-  } else if (rating < 97) {
-    return 'rating5';
-  } else if (rating < 100) {
-    return 'rating6';
-  }
-}
-
-// HTML for posts and replies
-function getPostHTML(start, end) {
-  let combinedHTML = '';
-  for (let i = start; i < end; i++) {
-    const { name, rating, ratingColor, username, description, replyCount, likeCount, shareCount, likeButtonImg, bookmarkImg, likeCountTextColor} = posts[i];
-    const postHTML =
-      `<div class="post">
-        <div class="rating ${ratingColor}">${rating}</div>
-        <div class="post-header">
-          <div class="restaurant-name">${name}</div>
-          <div class="post-time">2 months ago</div>
-          <div class="bs">
-            <img class="bookmark-icon" src=${bookmarkImg}>
-            <div class="bs-tooltip">Bookmark</div>
-          </div>
-        </div>
-        <div class="username">@${username}</div>
-        <div class="description">${description}</div>
-        <div class="image-grid">
-        </div>
-        <div class="post-stats">
-          <div class="reply-container">
-            <img class="reply-icon" src="images/replies.png">
-            <div>${replyCount}</div>
-            <div class="tooltip">Reply</div>
-          </div>
-          <div class="like-container">
-            <img class="like-icon" src=${likeButtonImg}>
-            <div class=${likeCountTextColor}>${likeCount}</div>
-            <div class="tooltip">Like</div>
-          </div>
-          <div class="share-container">
-            <img class="share-icon" src="images/share.png">
-            <div>${shareCount}</div>
-            <div class="tooltip">Share</div>
-          </div>
-        </div>
-      </div>`
-    combinedHTML += postHTML;
-  }
-  return combinedHTML;
-}
-function getReplyHTML(index) {
-  html =
-  `<div class="post-reply-container">
-    <input class="reply-username-input" placeholder="Username">
-    <textarea class="comment-input" placeholder="Share your thoughts!"></textarea>
-    <div class="reply-buttons">
-      <button class="delete-replies-button">Delete</button>
-      <button class="send-reply-button">Send</button>
-    </div>
-  </div>`
-  for(let i=0; i<posts[index].replies.length; i++) {
-    html += 
-      `<div class="reply">
-        <div class="reply-username">@${posts[index].replies[i].username}</div>
-        <div class="reply-comment">${posts[index].replies[i].comment}</div>
-      </div>`
-  }
-  return html;
-}
-
-// Temporary
-function deletePosts() {
-  posts.splice(0, 1);
-  localStorage.setItem('posts', JSON.stringify(posts));
+  localStorage.setItem("posts", JSON.stringify(posts));
   renderPosts(0, posts.length);
 }
-function deleteReplies(index) {
-  posts[index].replies.splice(0, 1);
-  posts[index].replyCount--;
-  renderPostsAndReplies(0, posts.length);
+
+// Reply Functions
+function getReplyFormHTML() {
+  const replyFormHTML = 
+    `<div class="reply-form flex">
+      <input class="reply-username-input" placeholder="Username">
+      <textarea class="comment-input" placeholder="Post your reply"></textarea>
+      <div class="reply-buttons flex">
+        <button class="delete-replies-button">Delete reply (temp)</button>
+        <button class="send-reply-button">Send</button>
+      </div>
+    </div>`
+  return replyFormHTML;
 }
 
-// function toggleDisplayById(elementId) {
-//   if(elementId.classList.contains('not-visible')) {
-//     elementId.classList.remove('not-visible');
-//   } else {
-//     elementId.classList.add('not-visible');
-//   }
-// }
+function getRepliesHTML(index) {
+  let repliesHTML = "";
+  for(let i=0; i<posts[index].replies.length; i++) {
+    const { replyUsername, comment } = posts[index].replies[i];
+    repliesHTML += 
+      `<div class="reply flex">
+        <div class="reply-header">
+          <span class="bold">@${replyUsername}</span>
+          <span style="color: dimgray;">&#183; Oct 12</span>
+        </div>
+        <div class="comment">${comment}</div>
+        <div class="reply-stats flex">
+          <button class="r-like-button"></button>0
+          <button class="r-reply-button"></button>
+        </div>
+      </div>`
+  }
+  return repliesHTML;
+}
 
-// Change the state of the form
-function openForm() {
-  const form = document.getElementById('add-post-form');
-  form.style.display = "grid";
-}
-function closeForm() {
-  const form = document.getElementById('add-post-form');
-  form.style.display = "none";
-  document.getElementById('form-error-message').innerHTML = '';
-  clearForm();
-}
-function clearForm() {
-  document.getElementById('restaurant-name-input').value = '';
-  document.getElementById('rating-input').value = '';
-  document.getElementById('username-input').value = '';
-  document.getElementById('description-input').value = '';
+function renderPostAndReplies(index) {
+  let postAndRepliesHTML = getPostsHTML(index, index + 1);
+  postAndRepliesHTML += getReplyFormHTML();
+  postAndRepliesHTML += getRepliesHTML(index);
+  console.log("post and replies rendered");
+  document.getElementById("posts").innerHTML = postAndRepliesHTML;
+  addSubmitReplyEventListener(index);
+  addSinglePostLikeInteraction(index);
 }

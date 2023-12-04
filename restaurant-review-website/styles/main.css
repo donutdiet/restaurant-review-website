@@ -1,16 +1,27 @@
 /* ------------------------ */
-/* Body Styles              */
+/* Main Page Layout         */
 /* ------------------------ */
 
-body {
-  font-family: Roboto, Arial;
+.display {
+  max-width: 1400px;
+  margin: auto;
+  height: 250vh;
+  font-family: var( --ff-roboto);
 }
 
-#main-layout-grid {
-  grid-template-columns: 65px 3fr 2fr;
-  grid-template-rows: 35px 1fr;
-  gap: 4px;
-  padding-right: 4px;
+.info-section {
+  flex: 2;
+}
+
+/* ------------------------ */
+/* Button Styles            */
+/* ------------------------ */
+
+button:hover {
+  background-image: linear-gradient(rgb(0 0 0/3%) 0 0);
+}
+button:active {
+  background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
 }
 
 /* ------------------------ */
@@ -23,8 +34,14 @@ body {
   --clr-light: 238 143 159;
   --clr-white: 253 253 253;
 
+  --clr-rating-0: 110 110 110;
+  --clr-rating-1: 215 84 84;
+  --clr-rating-2: 218 165 32;
+  --clr-rating-3: 156 204 59;
+  --clr-rating-4: 19 167 19;
+
   /* font families */
-  --ff-roboto: "Roboto";
+  --ff-roboto: "Arial";
 }
 
 /* ------------------------ */
@@ -54,8 +71,9 @@ picture {
 /* Set up the body */
 
 body {
-  /* line-height: 1.5; */
+  /* line-height: 1.25; */
   min-height: 100vh;
+  font-size: 15px;
 }
 
 /* Make images easier to work with */
@@ -89,13 +107,6 @@ select {
   display: grid;
 }
 
-.container {
-  /* relative to element's font size */
-  padding-inline: 2em; 
-  margin-inline: auto;
-  max-width: 80rem;
-}
-
 /* Colors */
 
 .bg-dark { background-color: rgb( var(--clr-dark) );}
@@ -106,31 +117,11 @@ select {
 .text-light { color: rgb( var(--clr-light) );}
 .text-white { color: rgb( var(--clr-white) );}
 
-/* ------------------------ */
-/* Misc Buttons             */
-/* ------------------------ */
+.text-rating-0 { color: rgb( var(--clr-rating-0) );}
+.text-rating-1 { color: rgb( var(--clr-rating-1) );}
+.text-rating-2 { color: rgb( var(--clr-rating-2) );}
+.text-rating-3 { color: rgb( var(--clr-rating-3) );}
+.text-rating-4 { color: rgb( var(--clr-rating-4) );}
+.text-rating-5 { color: rgb( var(--clr-light) );}
 
-.button-row {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-}
-
-#add-entry-button {
-  font-size: 12px;
-  border: none;
-  cursor: pointer; 
-  transition: opacity 0.1s;
-  position: fixed;
-  right: 40px;
-  bottom: 44px;
-  font-size: 16px;
-  padding: 30px 20px;
-  border-radius: 34px;
-  z-index: 1;
-}
-#add-entry-button:hover {
-  background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
-}
-#add-entry-button:active {
-  background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
-}
+.bold { font-weight: bold; }
