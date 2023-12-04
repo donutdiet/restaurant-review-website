@@ -187,6 +187,7 @@ function submitReplyForm(index) {
       replyUsername: replyUsername,
       comment: replyComment
     });
+    posts[index].replyCount++;
     localStorage.setItem("posts", JSON.stringify(posts));
     renderPostAndReplies(index);
   }
