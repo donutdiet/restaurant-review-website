@@ -50,7 +50,6 @@
 .r-reply-button {
   padding: 12px;
   align-self: center;
-  border: none;
   border: 1px solid black;
   cursor: pointer;
 }

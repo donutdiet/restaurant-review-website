@@ -16,42 +16,6 @@ document.getElementById("home-tab").addEventListener("click", () => {
   localStorage.setItem("display", JSON.stringify(display));
 });
 
-// Post Functions
-function addPostEventListener() {
-  document.querySelectorAll(".post").forEach((post, index) => {
-    post.addEventListener("click", () => {
-      renderPostAndReplies(index);
-      display.state = "post";
-      display.index = index;
-      localStorage.setItem("display", JSON.stringify(display));
-    });
-  });
-}
-
-function addPostLikeInteraction() {
-  document.querySelectorAll(".like-button").forEach((likeButton, index) => {
-    likeButton.addEventListener("click", e => {
-      likeButtonClicked(index); e.stopPropagation(); // Button overlaps with div.
-    });
-  });
-}
-
-function addSinglePostLikeInteraction(index) {
-  document.querySelector(".like-button").addEventListener("click", e => {
-    if(posts[index].likeStatus) {
-      posts[index].likeCount--;
-      posts[index].likeStatus = false;
-      console.log("unliked post");
-    } else {
-      posts[index].likeCount++;
-      posts[index].likeStatus = true;
-      console.log("liked post");
-    }
-    localStorage.setItem("posts", JSON.stringify(posts));
-    renderPostAndReplies(index);
-  })
-}
-
 // Post Form Buttons
 document.getElementById('post-button').addEventListener("click", () => {
   openPostForm();
@@ -70,10 +34,54 @@ document.getElementById('form-exit-button').addEventListener("click", () => {
   closeForm();
 });
 
+// Post Functions
+function addPostEventListener() {
+  document.querySelectorAll(".post").forEach((post, index) => {
+    post.addEventListener("click", () => {
+      renderPostAndReplies(index);
+      display.state = "post";
+      display.index = index;
+      localStorage.setItem("display", JSON.stringify(display));
+    });
+  });
+}
+
+function addPostLikeInteraction() {
+  document.querySelectorAll(".like-button").forEach((likeButton, index) => {
+    likeButton.addEventListener("click", e => {
+      postLikeButtonClicked(index); e.stopPropagation(); // Button overlaps with div.
+    });
+  });
+}
+
+function addSinglePostLikeInteraction(index) {
+  document.querySelector(".like-button").addEventListener("click", e => {
+    if(posts[index].likeStatus) {
+      posts[index].likeCount--;
+      posts[index].likeStatus = false;
+      console.log("unliked post");
+    } else {
+      posts[index].likeCount++;
+      posts[index].likeStatus = true;
+      console.log("liked post");
+    }
+    localStorage.setItem("posts", JSON.stringify(posts));
+    renderPostAndReplies(index);
+  });
+}
+
 // Reply Funcions
 function addSubmitReplyEventListener(index) {
   document.querySelector(".send-reply-button").addEventListener("click", () => {
     submitReplyForm(index);
+  });
+}
+
+function addReplyLikeInteraction(postIndex) {
+  document.querySelectorAll(".r-like-button").forEach((likeButton, replyIndex) => {
+    likeButton.addEventListener("click", () => {
+      replyLikeButtonClicked(postIndex, replyIndex);
+    })
   });
 }
 
@@ -185,11 +193,14 @@ function submitReplyForm(index) {
   if(replyUsername.trim() != "" && replyComment.trim() != "") {
     posts[index].replies.unshift({
       replyUsername: replyUsername,
-      comment: replyComment
+      comment: replyComment,
+      likeCount: 0,
+      likeStatus: false
     });
     posts[index].replyCount++;
     localStorage.setItem("posts", JSON.stringify(posts));
     renderPostAndReplies(index);
+    console.log(posts);
   }
 }
 
@@ -234,7 +245,7 @@ function deletePost() {
   renderPosts(0, posts.length);
 }
 
-function likeButtonClicked(index) {
+function postLikeButtonClicked(index) {
   if(posts[index].likeStatus) {
     posts[index].likeCount--;
     posts[index].likeStatus = false;
@@ -265,7 +276,7 @@ function getReplyFormHTML() {
 function getRepliesHTML(index) {
   let repliesHTML = "";
   for(let i=0; i<posts[index].replies.length; i++) {
-    const { replyUsername, comment } = posts[index].replies[i];
+    const { replyUsername, comment, likeCount } = posts[index].replies[i];
     repliesHTML += 
       `<div class="reply flex">
         <div class="reply-header">
@@ -274,12 +285,26 @@ function getRepliesHTML(index) {
         </div>
         <div class="comment">${comment}</div>
         <div class="reply-stats flex">
-          <button class="r-like-button"></button>0
+          <button class="r-like-button"></button>${likeCount}
           <button class="r-reply-button"></button>
         </div>
       </div>`
   }
   return repliesHTML;
+}
+
+function replyLikeButtonClicked(postIndex, replyIndex) {
+  if(posts[postIndex].replies[replyIndex].likeStatus) {
+    posts[postIndex].replies[replyIndex].likeCount--;
+    posts[postIndex].replies[replyIndex].likeStatus = false;
+    console.log("unliked comment");
+  } else {
+    posts[postIndex].replies[replyIndex].likeCount++;
+    posts[postIndex].replies[replyIndex].likeStatus = true;
+    console.log("liked comment");
+  }
+  localStorage.setItem("posts", JSON.stringify(posts));
+  renderPostAndReplies(postIndex, postIndex + 1);
 }
 
 function renderPostAndReplies(index) {
@@ -290,4 +315,5 @@ function renderPostAndReplies(index) {
   document.getElementById("posts").innerHTML = postAndRepliesHTML;
   addSubmitReplyEventListener(index);
   addSinglePostLikeInteraction(index);
+  addReplyLikeInteraction(index);
 }
